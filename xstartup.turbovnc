@@ -1,0 +1,24 @@
+#!/bin/sh
+
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+XDG_SESSION_TYPE=x11;  export XDG_SESSION_TYPE
+
+OS=`uname -s`
+
+# Emulate GDM
+USESTARTUP=0
+  echo "No window manager startup script found.  Use the TVNC_WM environment"
+  echo "variable to specify the path to a window manager startup script or"
+  echo "executable.  Falling back to TWM."
+  which ls >/dev/null && {
+    if [ -f $HOME/.Xresources ]; then xrdb $HOME/.Xresources; fi
+    xsetroot -solid grey
+    #xterm -geometry 80x24+10+10 -ls -title "TEST Desktop" &
+    singularity exec -B /local_scratch:/local_scratch -B /tmp:/tmp -B /run:/run /local_scratch/nortamoh/mate.sif mate-session
+  } || {
+    echo "TWM not found.  I give up."
+    exit 1
+  }
+
+

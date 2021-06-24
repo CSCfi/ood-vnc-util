@@ -1,0 +1,25 @@
+Bootstrap: docker
+From: centos:7
+
+
+%environment 
+    SHELL=/bin/bash
+    export SHELL
+
+%post
+
+    # Install necessary packages
+    yum update -y && yum install -y epel-release
+    yum -y groupinstall Xfce
+    yum -y install xorg-x11-fonts-Type1 xorg-x11-fonts-misc
+    yum -y install libglvnd-opengl
+
+  yum groupinstall -y "X Window System" 
+  yum install -y freeglut-devel
+ yum install -y \
+    less \
+    wget \
+    vim 
+  
+  dbus-uuidgen > /etc/machine-id
+

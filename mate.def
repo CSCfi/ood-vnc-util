@@ -1,0 +1,23 @@
+BootStrap: docker
+From: centos:centos7
+
+%post
+  # add paths
+  mkdir -p /scratch/global /scratch/local /rcc/stor1/refdata /rcc/stor1/depts /rcc/stor1/projects
+  
+  # Software versions
+  export TURBOVNC_VERSION=2.2.1
+  export WEBSOCKIFY_VERSION=0.8.0
+
+  # Get dependencies
+  yum update -y && yum upgrade -y
+  yum install -y epel-release
+  yum groupinstall -y "X Window System" 
+  yum groupinstall -y "MATE Desktop"
+  yum install -y \
+    less \
+    wget \
+    vim 
+  
+  dbus-uuidgen > /etc/machine-id
+
