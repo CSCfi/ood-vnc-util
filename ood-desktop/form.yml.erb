@@ -1,0 +1,44 @@
+<% require "/appl/opt/ood_util/attributes/csc_slurm_project" -%>
+<% require "/appl/opt/ood_util/attributes/csc_slurm_partition" -%>
+
+cluster: "puhti"
+
+attributes:
+  desktop:
+    widget: select
+    options:
+      - ["mate", "mate"]
+      - ["xfce", "xfce"]
+      - ["gnome", "gnome"]
+      - ["kde", "kde"]
+    value: "mate"
+  bc_vnc_idle: 0
+  bc_vnc_resolution:
+    required: true
+  time: 
+    value: "4:00:00"
+  cores:
+    value: 2
+    widget: number_field
+    label: "Number of CPUs"
+  nvme:
+    value: 32
+    widget: number_field
+    label: "Local disk (GB)"
+    min: 0
+    max: 640
+  memory:
+    widget: number_field
+    label: "Memory (GB)"
+    value: 2
+form:
+  - csc_slurm_project
+  - csc_slurm_partition
+  - bc_vnc_idle
+  - desktop
+  - bc_vnc_resolution
+  - cores
+  - memory
+  - nvme
+  - time
+  - bc_email_on_started

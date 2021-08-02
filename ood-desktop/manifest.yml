@@ -1,0 +1,8 @@
+---
+name: Desktop
+icon: fa://desktop
+category: Interactive Apps
+subcategory: Desktops
+role: batch_connect
+description: |
+  Interactive app that launches a GUI desktop

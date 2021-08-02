@@ -1,0 +1,9 @@
+cd "${HOME}"
+
+module purge && module restore
+
+export SHELL="$(getent passwd $USER | cut -d: -f7)"
+
+echo "Launching desktop"
+source "<%= session.staged_root.join("desktops", "#{context.desktop}.sh") %>"
+
