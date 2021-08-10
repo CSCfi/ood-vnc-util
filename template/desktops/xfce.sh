@@ -41,4 +41,5 @@ fi
 eval $(dbus-launch --sh-syntax)
 
 # Start up xfce desktop (block until user logs out of desktop)
-xfce4-session
+#xfce4-session
+xfwm4
