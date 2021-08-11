@@ -28,7 +28,11 @@ From: centos:7
     python3-pip \
     libxkbcommon-x11 \
     libglvnd \
-    libXv
+    libXv \
+    tcsh \
+    motif \
+    libXp \
+    libXpm
 
   yes | pip3 install numpy
   mkdir -p /opt/websockify

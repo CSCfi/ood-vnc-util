@@ -25,7 +25,11 @@ From: centos:7
     libxkbcommon-x11 \
     libglvnd \
     libXv \
-    xorg-x11-server-Xvfb
+    xorg-x11-server-Xvfb \
+    tcsh \
+    motif \
+    libXp \
+    libXpm
  
   yes | pip3 install numpy 
   
