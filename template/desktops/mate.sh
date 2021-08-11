@@ -20,6 +20,7 @@ for service in "gnome-keyring-pkcs11" "gnome-keyring-secrets" "gnome-keyring-ssh
 done
 
 dconf write /org/mate/terminal/profiles/default/login-shell true
-#module load visit
+#module load paraview
+#paraview
 #GALLIUM_DRIVER="llvmpipe" visit
 mate-session

@@ -1,3 +1,4 @@
+#!/bin/bash
 # Turn off screensaver
 gconftool-2 --set -t boolean /apps/gnome-screensaver/idle_activation_enabled false
 

@@ -1,0 +1,21 @@
+<% sing_image = desktop.empty? ? File.join("/appl","opt","ood","#{ENV["SLURM_OOD_ENV"]}","vnc_images", "xfce.sif") : File.join("/appl", "opt", "ood", "#{ENV["SLURM_OOD_ENV"]}", "vnc_images", "#{desktop}.sif") -%>
+---
+batch_connect:
+  template: vnc
+  header: |
+    source /appl/profile/zz-csc-env.sh
+    [[ $(type -t module) == "function" ]] & export -f module
+    export XDG_RUNTIME_DIR="$TMPDIR/xdg_runtime"
+    mkdir -p "$XDG_RUNTIME_DIR"
+    export PATH="$PWD/bin:$PATH"
+    export SING_IMAGE="<%= sing_image -%>"
+    export SING_FLAGS="--nv -B /tmp:/tmp -B /run:/run -B /appl:/appl"
+  websockify_cmd: 'singularity exec <%= sing_image %> /opt/websockify/run'
+script:
+  native:
+    - '-c'
+    - '<%= csc_cores %>'
+    - '-t'
+    - '<%= csc_time %>'
+    - '--mem=<%= csc_memory %>G'
+    - '--gres=nvme:<%= csc_nvme %>'
