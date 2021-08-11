@@ -1,4 +1,4 @@
-<% sing_image = desktop.empty? ? File.join("/appl","opt","ood","#{ENV["SLURM_OOD_ENV"]","vnc_images", "xfce.sif") : File.join("/appl", "opt", "ood", "#{ENV["SLURM_OOD_ENV"]", "vnc_images", "#{desktop}.sif") -%>
+<% sing_image = desktop.empty? ? File.join("/appl","opt","ood","#{ENV["SLURM_OOD_ENV"]}","vnc_images", "xfce.sif") : File.join("/appl", "opt", "ood", "#{ENV["SLURM_OOD_ENV"]}", "vnc_images", "#{desktop}.sif") -%>
 ---
 batch_connect:
   template: vnc
