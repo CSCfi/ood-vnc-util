@@ -14,5 +14,7 @@ if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
 
+echo "yes" >> "$XDG_CONFIG_HOME/gnome-initial-setup-done"
+
 # Start up Gnome desktop (block until user logs out of desktop)
 /etc/X11/xinit/Xsession gnome-session

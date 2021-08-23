@@ -12,15 +12,13 @@ if [[ -f "${HOME}/.config/monitors.xml" ]]; then
 fi
 
 # Disable useless services on autostart
-AUTOSTART="${HOME}/.config/autostart"
+AUTOSTART="$XDG_CONFIG_HOME/autostart"
 rm -fr "${AUTOSTART}"    # clean up previous autostarts
 mkdir -p "${AUTOSTART}"
-for service in "gnome-keyring-pkcs11" "gnome-keyring-secrets" "gnome-keyring-ssh" "mate-volume-control-applet" "polkit-mate-authentication-agent-1" "spice-vdagent" "print-applet"; do
+for service in "gnome-keyring-pkcs11" "gnome-keyring-secrets" "gnome-keyring-ssh" "mate-volume-control-applet" "polkit-mate-authentication-agent-1" "spice-vdagent" "print-applet" "mate-power-manager" "mate-screensaver"; do
   cat "/etc/xdg/autostart/${service}.desktop" <(echo "X-MATE-Autostart-enabled=false") > "${AUTOSTART}/${service}.desktop"
 done
 
 dconf write /org/mate/terminal/profiles/default/login-shell true
-#module load paraview
-#paraview
-#GALLIUM_DRIVER="llvmpipe" visit
+
 mate-session
