@@ -4,6 +4,9 @@ From: centos:7
 %environment
   export "PATH=/opt/TurboVNC/bin:${PATH}"
 
+%files
+  background.jpg /background.jpg
+
 %post
   # add paths
   mkdir -p /scratch/global /scratch/local /rcc/stor1/refdata /rcc/stor1/depts /rcc/stor1/projects

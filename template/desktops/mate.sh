@@ -11,6 +11,9 @@ if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
 
+# Set background to CSC background
+gsettings set org.mate.background picture-filename '/background.jpg'
+
 # Disable useless services on autostart
 AUTOSTART="$XDG_CONFIG_HOME/autostart"
 rm -fr "${AUTOSTART}"    # clean up previous autostarts

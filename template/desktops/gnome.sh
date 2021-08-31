@@ -5,6 +5,9 @@ gconftool-2 --set -t boolean /apps/gnome-screensaver/idle_activation_enabled fal
 # Use browser window instead in nautilus
 gconftool-2 --set -t boolean /apps/nautilus/preferences/always_use_browser true
 
+# Set background to CSC background
+gsettings set org.gnome.desktop.background picture-uri '/background.jpg'
+
 # Disable the disk check utility on autostart
 mkdir -p "${HOME}/.config/autostart"
 cat "/etc/xdg/autostart/gdu-notification-daemon.desktop" <(echo "X-GNOME-Autostart-enabled=false") > "${HOME}/.config/autostart/gdu-notification-daemon.desktop"
