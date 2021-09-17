@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=SNAP
+Terminal=true
+Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;module load snap;snap"'
+Icon=<%= File.join(session.staged_root, "icons", "snap.png") -%>

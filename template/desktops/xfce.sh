@@ -14,6 +14,12 @@ fi
 xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool -s false
 xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool -s false
 
+# Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
+xdg-user-dirs-update --set DESKTOP "$XDG_DESKTOP_DIR"
+
+# Copy over the user's icons
+cp -n "$HOME/Desktop"/* "$XDG_DESKTOP_DIR"
+
 # Disable useless services on autostart
 AUTOSTART="$XDG_CONFIG_HOME/autostart"
 rm -fr "${AUTOSTART}"    # clean up previous autostarts

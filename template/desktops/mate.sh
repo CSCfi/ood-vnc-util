@@ -10,9 +10,14 @@ gsettings set org.mate.session gnome-compat-startup "['smproxy']"
 if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
-
 # Set background to CSC background
 gsettings set org.mate.background picture-filename '/background.jpg'
+
+# Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
+xdg-user-dirs-update --set DESKTOP "$XDG_DESKTOP_DIR"
+
+# Copy over the user's icons
+cp -n "$HOME/Desktop"/* "$XDG_DESKTOP_DIR"
 
 # Disable useless services on autostart
 AUTOSTART="$XDG_CONFIG_HOME/autostart"

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=QGIS
+Terminal=true
+Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;module load qgis;qgis"'
+Icon=<%= File.join(session.staged_root, "icons", "qgis.png") -%>
