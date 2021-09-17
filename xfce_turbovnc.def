@@ -35,7 +35,11 @@ From: centos:7
     tcsh \
     motif \
     libXp \
-    libXpm
+    libXpm \
+    emacs \
+    xterm \
+    git \
+    xdg-user-dirs
 
  
   yes | pip3 install numpy
