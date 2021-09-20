@@ -3,6 +3,12 @@
 cluster: "puhti"
 
 attributes:
+  csc_slurm_partition:
+    value: interactive
+    select:
+      - "interactive"
+      - "small"
+      - "test"
   desktop:
     widget: select
     options:
