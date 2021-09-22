@@ -2,5 +2,5 @@
 Type=Application
 Name=SNAP
 Terminal=true
-Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;module load snap;snap"'
+Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;module load snap;source snap_add_userdir $TMPDIR;snap"'
 Icon=<%= File.join(session.staged_root, "icons", "snap.png") -%>
