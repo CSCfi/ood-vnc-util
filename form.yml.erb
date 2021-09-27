@@ -1,5 +1,4 @@
 <% require "/ood/deps/util/attributes/csc_smart_attributes" -%>
-
 cluster: "puhti"
 
 attributes:
@@ -37,14 +36,17 @@ attributes:
     max: 640
   csc_memory:
     value: 2
+
 form:
   - csc_slurm_project
   - csc_slurm_partition
-  - desktop
-  - app
+  - csc_header_resources
   - csc_cores
   - csc_memory
   - csc_nvme
   - csc_time
+  - csc_header_settings
+  - desktop
+  - app
   - bc_email_on_started
   - csc_slurm_limits
