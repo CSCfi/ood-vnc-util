@@ -17,11 +17,9 @@ app="<%= context.app %>"
   if [[ -z "$app" ]];then
     xterm
   else
-    xterm &
     exec "$app_script"
   fi
 <% else %>
-  xterm &
   if [[ -n "$app" ]];then
     exec "$app_script" &
   fi
