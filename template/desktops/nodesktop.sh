@@ -9,4 +9,4 @@ fi
 eval $(dbus-launch --sh-syntax)
 
 # Start up xfce desktop (block until user logs out of desktop)
-xfwm4
+xfwm4 --compositor=off --sm-client-disable

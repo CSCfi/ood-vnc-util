@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=GRASS GIS
+Terminal=true
+Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;module load qgis;grass"'
+Icon=<%= File.join(session.staged_root, "icons", "grass.png") -%>

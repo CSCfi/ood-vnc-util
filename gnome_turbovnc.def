@@ -7,6 +7,9 @@ From: centos:7
   export SHELL
   export "PATH=/opt/TurboVNC/bin:${PATH}"
 
+%files
+  background.jpg /background.jpg
+
 %post
   
   export TURBOVNC_VERSION=2.2.6

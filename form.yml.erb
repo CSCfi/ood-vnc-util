@@ -1,15 +1,18 @@
 <% require "/ood/deps/util/attributes/csc_smart_attributes" -%>
-
 cluster: "puhti"
 
 attributes:
+  csc_slurm_partition:
+    value: interactive
+    select:
+      - "interactive"
+      - "small"
+      - "test"
   desktop:
     widget: select
     options:
       - ["mate", "mate"]
       - ["xfce", "xfce"]
-      - ["gnome", "gnome"]
-      - ["kde", "kde"]
       - ["None", ""]
     value: "mate"
   app:
@@ -23,6 +26,10 @@ attributes:
       - ["ParaView", "paraview"]
       - ["Visit", "visit"]
       - ["VMD", "vmd"]
+      - ["GRASS GIS", "grass"]
+      - ["QGIS", "qgis"]
+      - ["SAGA GIS", "saga"]
+      - ["SNAP", "snap"]
   bc_vnc_idle: 0
   bc_vnc_resolution:
     required: true
@@ -33,16 +40,17 @@ attributes:
     max: 640
   csc_memory:
     value: 2
+
 form:
   - csc_slurm_project
   - csc_slurm_partition
-  - bc_vnc_idle
-  - desktop
-  - app
-  - bc_vnc_resolution
+  - csc_header_resources
   - csc_cores
   - csc_memory
   - csc_nvme
   - csc_time
+  - csc_header_settings
+  - desktop
+  - app
   - bc_email_on_started
   - csc_slurm_limits

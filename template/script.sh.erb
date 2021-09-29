@@ -3,6 +3,8 @@ cd "${HOME}"
 module purge && module restore
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
+export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+export XDG_DESKTOP_DIR="<%= session.staged_root.join("Desktop") %>"
 
 echo "Launching desktop <%= context.desktop %> with app <%= context.app %>"
 
@@ -15,11 +17,9 @@ app="<%= context.app %>"
   if [[ -z "$app" ]];then
     xterm
   else
-    xterm &
     exec "$app_script"
   fi
 <% else %>
-  xterm &
   if [[ -n "$app" ]];then
     exec "$app_script" &
   fi
