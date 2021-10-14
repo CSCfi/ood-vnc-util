@@ -10,7 +10,7 @@ batch_connect:
     export PATH="$PWD/bin:$PATH"
     export SING_IMAGE="<%= sing_image -%>"
     export SING_FLAGS="--nv -B /tmp:/tmp -B /run:/run -B /appl:/appl -B <%= "#{File.join(staged_root, "Desktop")}:/usr/local/share/applications:ro" -%>"
-  websockify_cmd: 'singularity exec <%= sing_image %> /opt/websockify/run'
+  websockify_cmd: 'singularity_wrapper exec /opt/websockify/run'
 script:
   native:
     - '-c'
