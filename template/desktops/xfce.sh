@@ -1,3 +1,7 @@
+#!/bin/bash
+
+export PS1='(CONTAINER)[\u@\h \W]\$'
+
 # Remove any preconfigured monitors
 if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"

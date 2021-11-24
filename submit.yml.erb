@@ -6,7 +6,7 @@ batch_connect:
     source /appl/profile/zz-csc-env.sh
     [[ $(type -t module) == "function" ]] & export -f module
     export XDG_RUNTIME_DIR="$TMPDIR/xdg_runtime"
-    mkdir -p "$XDG_RUNTIME_DIR"
+    mkdir -p -m 700 "$XDG_RUNTIME_DIR"
     export PATH="$PWD/bin:$PATH"
     export SING_IMAGE="<%= sing_image -%>"
     export SING_FLAGS="--nv -B /tmp:/tmp -B /run:/run -B /appl:/appl -B <%= "#{File.join(staged_root, "Desktop")}:/usr/local/share/applications:ro" -%>"
