@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PS1='(CONTAINER)[\u@\h \W]\$'
+export PS1='(CONTAINER)[\u@\h \W]\$ '
 
 # Remove any preconfigured monitors
 if [[ -f "${HOME}/.config/monitors.xml" ]]; then
