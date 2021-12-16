@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PS1='(CONTAINER)[\u@\h \W]\$'
+export PS1='(CONTAINER)[\u@\h \W]\$ '
 # Turn off screensaver (this may not exist at all)
 gsettings set org.mate.screensaver idle-activation-enabled false
 
