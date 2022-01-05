@@ -3,6 +3,8 @@
 OOD interactive app that launches a VNC inside a container with apps from the module system available.
 The app is based on the normal bc_desktop app but modified to run inside a container.
 
+The app requires [ood-util](https://github.com/CSCfi/ood-util) and [ood-initializers](https://github.com/CSCfi/ood-initializers) to work.
+
 The user can select either *xfce*, *mate* or *single application* as the desktop environment.
 When xfce or mate is selected the user will have icons on the desktop to launch some applications that we support.
 When *single application* is selected we only launch xfwm and the selected application.
