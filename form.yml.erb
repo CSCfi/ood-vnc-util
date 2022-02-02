@@ -10,6 +10,13 @@ attributes:
       - "test"
       - "fmi"
       - "fmitest"
+  csc_slurm_reservation:
+    partitions:
+      - "interactive"
+      - "small"
+      - "test"
+      - "fmi"
+      - "fmitest"
   desktop:
     widget: select
     options:
@@ -45,6 +52,7 @@ attributes:
     app: "sys/ood-vnc"
 
 form:
+  - csc_slurm_reservation
   - csc_slurm_project
   - csc_slurm_partition
   - csc_header_resources
