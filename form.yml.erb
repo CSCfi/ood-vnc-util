@@ -28,17 +28,18 @@ attributes:
     widget: select
     options:
       - ["None", ""]
+      - ["CloudCompare", "cloudcompare"]
       - ["COMSOL", "comsol"]
       - ["Grace", "grace"]
+      - ["GRASS GIS", "grass"]
       - ["Maestro", "maestro"]
       - ["MATLAB", "matlab"]
       - ["ParaView", "paraview"]
-      - ["Visit", "visit"]
-      - ["VMD", "vmd"]
-      - ["GRASS GIS", "grass"]
       - ["QGIS", "qgis"]
       - ["SAGA GIS", "saga"]
       - ["SNAP", "snap"]
+      - ["Visit", "visit"]
+      - ["VMD", "vmd"]
   bc_vnc_idle: 0
   bc_vnc_resolution:
     required: true
@@ -50,8 +51,12 @@ attributes:
     value: 2
   csc_reset_cache:
     app: "sys/ood-vnc"
+  csc_extra_desc:
+    desc: |
+      <a href="https://docs.csc.fi/computing/webinterface/desktop/" target="_blank">Documentation</a>
 
 form:
+  - csc_extra_desc
   - csc_slurm_reservation
   - csc_slurm_project
   - csc_slurm_partition

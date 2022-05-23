@@ -1,8 +1,8 @@
 ---
 name: Desktop
 icon: fa://desktop
-category: "Apps​"
+category: "Apps"
 subcategory: "Graphical applications"
 role: batch_connect
 description: |
-  Interactive app that launches a GUI desktop
+  Interactive session with graphical desktop, where different Puhti tools are available
