@@ -2,5 +2,5 @@
 Type=Application
 Name=Host Terminal
 <%= context.desktop == "xfce" ? "Terminal=true\n" : "" -%>
-Exec=<%= context.desktop == "mate" ? "mate-terminal -- sh -c" : "bash -c" -%> 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;bash"'
+Exec=<%= context.desktop == "mate" ? "mate-terminal -- sh -c" : "bash -c" -%> 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;bash -l"'
 Icon=<%= context.desktop == "mate" ? "/usr/share/icons/mate/256x256/apps/utilities-terminal.png" : "/usr/share/icons/gnome/256x256/apps/utilities-terminal.png"%>
