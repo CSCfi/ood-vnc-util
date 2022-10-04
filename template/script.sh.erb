@@ -23,5 +23,7 @@ app="<%= context.app %>"
   if [[ -n "$app" ]];then
     exec "$app_script" &
   fi
-  singularity_wrapper exec "$desktop_script"
+  echo "$SINGULARITY_BIND"
+  export SINGULARITY_BIND="$SINGULARITY_BIND,$HOME"
+  apptainer_wrapper exec "$desktop_script"
 <% end %>
