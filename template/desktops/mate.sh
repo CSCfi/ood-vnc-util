@@ -2,6 +2,10 @@
 
 export PS1='(CONTAINER)[\u@\h \W]\$ '
 # Turn off screensaver (this may not exist at all)
+echo "DEBUG: $XDG_RUNTIME_DIR"
+ls $XDG_RUNTIME_DIR
+find $XDG_RUNTIME_DIR
+echo "DEBUG END"
 gsettings set org.mate.screensaver idle-activation-enabled false
 
 # Disable gnome-keyring-daemon
@@ -12,8 +16,10 @@ if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
 # Set background to CSC background
+echo "DEBUG SETTING BACKGROUND"
 gsettings set org.mate.background picture-filename '/background.jpg'
 
+echo "DEBUG SETTING DESKTOP"
 # Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
 xdg-user-dirs-update --set DESKTOP "$XDG_DESKTOP_DIR"
 
