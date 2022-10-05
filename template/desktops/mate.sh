@@ -15,9 +15,7 @@ gsettings set org.mate.session gnome-compat-startup "['smproxy']"
 if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
-# Set background to CSC background
-echo "DEBUG SETTING BACKGROUND"
-gsettings set org.mate.background picture-filename '/background.jpg'
+
 
 echo "DEBUG SETTING DESKTOP"
 # Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
@@ -36,4 +34,9 @@ done
 
 dconf write /org/mate/terminal/profiles/default/login-shell true
 eval $(dbus-launch --sh-syntax)
+
+# Set background to CSC background
+echo "DEBUG SETTING BACKGROUND"
+gsettings set org.mate.background picture-filename '/background.jpg'
+
 mate-session
