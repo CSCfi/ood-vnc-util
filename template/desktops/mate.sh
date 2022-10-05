@@ -35,5 +35,5 @@ for service in "gnome-keyring-pkcs11" "gnome-keyring-secrets" "gnome-keyring-ssh
 done
 
 dconf write /org/mate/terminal/profiles/default/login-shell true
-
+eval $(dbus-launch --sh-syntax)
 mate-session
