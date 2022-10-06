@@ -2,5 +2,5 @@
 Type=Application
 Name=SAGA GIS
 Terminal=true
-Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;module load r-env-singularity/4.0.4;singularity_wrapper exec saga_gui"'
+Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;module load r-env;apptainer_wrapper exec saga_gui"'
 Icon=<%= File.join(session.staged_root, "icons", "saga.png") -%>
