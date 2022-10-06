@@ -11,8 +11,6 @@ gsettings set org.mate.session gnome-compat-startup "['smproxy']"
 if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
-# Set background to CSC background
-gsettings set org.mate.background picture-filename '/background.jpg'
 
 # Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
 xdg-user-dirs-update --set DESKTOP "$XDG_DESKTOP_DIR"
@@ -29,5 +27,9 @@ for service in "gnome-keyring-pkcs11" "gnome-keyring-secrets" "gnome-keyring-ssh
 done
 
 dconf write /org/mate/terminal/profiles/default/login-shell true
+eval $(dbus-launch --sh-syntax)
+
+# Set background to CSC background
+gsettings set org.mate.background picture-filename '/background.jpg'
 
 mate-session
