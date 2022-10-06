@@ -1,3 +1,3 @@
 #!/bin/bash
-module load r-env-singularity/4.0.4
-xterm -hold -e "singularity_wrapper exec saga_gui"
+module load r-env
+xterm -hold -e "apptainer_wrapper exec saga_gui"
