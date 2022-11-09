@@ -2,10 +2,13 @@ cd "${HOME}"
 
 module purge && module restore
 /appl/opt/ood/test/soft/ssh-keygen.sh
+echo "Host r????? puhti* *.bullx localhost
+HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
 export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
 export XDG_DESKTOP_DIR="<%= session.staged_root.join("Desktop") %>"
+mkdir -p $XDG_DESKTOP_DIR
 
 echo "Launching desktop <%= context.desktop %> with app <%= context.app %>"
 
@@ -14,6 +17,28 @@ app_script="<%= session.staged_root.join("apps", "#{context.app}.sh") -%>"
 app="<%= context.app %>"
 export SING_FLAGS="$SING_FLAGS -B /tmp/$USER/$SLURM_JOB_ID/.ssh/config:$HOME/.ssh/config,/tmp/$USER/$SLURM_JOB_ID/.ssh/id_rsa_puhti_ood:$HOME/.ssh/id_rsa_puhti_ood"
 
+# Bind common CSC environment directories
+SING_FLAGS="$SING_FLAGS -B /projappl:/projappl -B /scratch:/scratch"
+
+# Bind TMPDIR if it is set and directory exists
+if [ -d "$TMPDIR" ]; then
+    SING_FLAGS="$SING_FLAGS -B $TMPDIR:$TMPDIR"
+fi
+
+# Bind LOCAL_SCRATCH if it is set and directory exists
+if [ -d "$LOCAL_SCRATCH" ]; then
+    SING_FLAGS="$SING_FLAGS -B $LOCAL_SCRATCH:$LOCAL_SCRATCH"
+fi
+
+# Bind /fmi if it is set and directory exists
+if [ -d "/fmi" ]; then
+    SING_FLAGS="$SING_FLAGS -B /fmi:/fmi"
+fi
+
+# Bind /appl/data
+if [ -d "/appl/data" ]; then
+    SING_FLAGS="$SING_FLAGS -B /appl/data:/appl/data"
+fi
 <% if context.desktop.empty? %>
   singularity exec $SING_FLAGS $SING_IMAGE "$desktop_script" &
   if [[ -z "$app" ]];then
