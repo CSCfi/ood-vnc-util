@@ -1,8 +1,7 @@
 #!/bin/bash
 
 export PS1='(CONTAINER)[\u@\h \W]\$ '
-# Turn off screensaver (this may not exist at all)
-gsettings set org.mate.screensaver idle-activation-enabled false
+
 
 # Disable gnome-keyring-daemon
 gsettings set org.mate.session gnome-compat-startup "['smproxy']"
@@ -31,5 +30,10 @@ eval $(dbus-launch --sh-syntax)
 
 # Set background to CSC background
 gsettings set org.mate.background picture-filename '/background.jpg'
+
+gsettings set org.mate.screensaver lock-enabled false
+
+# Turn off screensaver (this may not exist at all)
+gsettings set org.mate.screensaver idle-activation-enabled false
 
 mate-session
