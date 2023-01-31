@@ -1,7 +1,11 @@
 [Desktop Entry]
 Type=Application
-Name=Host Terminal
+Name=Terminal
 <%= context.desktop == "xfce" ? "Terminal=true\n" : "" -%>
+<% if context.desktop == "mate" %>
 Exec=<%= context.desktop == "mate" ? "mate-terminal -- sh -c" : "bash -c" -%> 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;bash -l"'
+<%else%>
+Exec=bash -l
+<%end%>
 Icon=<%= File.join(session.staged_root, "icons", "terminal.png") -%>
 

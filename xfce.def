@@ -1,4 +1,3 @@
-Bootstrap: docker
 From: rockylinux:8.6 
 
 %environment 
@@ -11,6 +10,12 @@ From: rockylinux:8.6
 
 %post 
 
+    # Only here to allow rootless building of container
+    cp /usr/bin/true /usr/sbin/groupadd
+    cp /usr/bin/true /usr/sbin/useradd
+    dnf -y install unbound-libs
+
+    dnf -y install libnsl
     dnf -y install dnf-plugins-core
     yum -y install epel-release
     dnf -y install firefox  
@@ -64,3 +69,17 @@ From: rockylinux:8.6
     wget https://github.com/novnc/websockify/archive/master.tar.gz -q -O - | tar xzf - -C /opt/websockify --strip-components=1
     yum clean all && rm -rf /var/cache/yum
     dbus-uuidgen > /etc/machine-id
+
+    # Hide the non-host terminal
+    echo -e '#!/bin/bash\n
+if [[ -z "$@" ]];then
+    ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;bash -l"
+else
+    ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR; $@ "
+fi
+' > /usr/bin/host_terminal
+    chmod +x /usr/bin/host_terminal
+    cp /usr/bin/xterm /usr/bin/real-xterm
+    cp /usr/bin/xfce4-terminal /usr/bin/real-xfce4-terminal
+    echo -e '#!/bin/bash\n/usr/bin/real-xterm -e "bash /usr/bin/host_terminal"' > /usr/bin/xterm
+    echo -e '#!/bin/bash\n/usr/bin/real-xfce4-terminal -e "/usr/bin/host_terminal \"$(echo $@ | sed 's/-x//g' )\""' > /usr/bin/xfce4-terminal
