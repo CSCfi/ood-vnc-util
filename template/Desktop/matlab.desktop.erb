@@ -2,5 +2,9 @@
 Type=Application
 Name=MATLAB
 Terminal=true
+<% if context.desktop == "mate" %>
 Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;module load matlab; matlab" '
+<%else%>
+Exec=module load matlab; matlab
+<%end%>
 Icon=<%= File.join(session.staged_root, "icons", "matlab.png") -%>

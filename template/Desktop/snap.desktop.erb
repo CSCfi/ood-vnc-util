@@ -2,5 +2,9 @@
 Type=Application
 Name=SNAP
 Terminal=true
+<% if context.desktop == "mate" %>
 Exec=bash -c 'ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;module load snap;source snap_add_userdir $TMPDIR;snap"'
+<%else%>
+Exec=module load snap;source snap_add_userdir $TMPDIR;snap
+<%end%>
 Icon=<%= File.join(session.staged_root, "icons", "snap.png") -%>
