@@ -1,8 +1,8 @@
 cd "${HOME}"
 
 module purge && module restore
-/appl/opt/ood/test/soft/ssh-keygen.sh
-echo "Host r????? puhti* *.bullx localhost
+/appl/opt/ood/$SLURM_OOD_ENV/soft/ssh-keygen.sh
+echo "Host r????? mahti* *.bullx localhost
 HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
@@ -15,7 +15,7 @@ echo "Launching desktop <%= context.desktop %> with app <%= context.app %>"
 desktop_script="<%= session.staged_root.join("desktops", context.desktop.empty? ? "nodesktop.sh" : "#{context.desktop}.sh") -%>"
 app_script="<%= session.staged_root.join("apps", "#{context.app}.sh") -%>"
 app="<%= context.app %>"
-export SING_FLAGS="$SING_FLAGS -B /tmp/$USER/$SLURM_JOB_ID/.ssh/config:$HOME/.ssh/config,/tmp/$USER/$SLURM_JOB_ID/.ssh/id_rsa_puhti_ood:$HOME/.ssh/id_rsa_puhti_ood"
+export SING_FLAGS="$SING_FLAGS -B /tmp/$USER/$SLURM_JOB_ID/.ssh/config:$HOME/.ssh/config,/tmp/$USER/$SLURM_JOB_ID/.ssh/id_rsa_mahti_ood:$HOME/.ssh/id_rsa_mahti_ood"
 
 # Bind common CSC environment directories
 SING_FLAGS="$SING_FLAGS -B /projappl:/projappl -B /scratch:/scratch"
@@ -54,5 +54,5 @@ fi
 <% end %>
 
 
-sed -i "/puhti-ood-$SLURM_JOB_ID/d" ~/.ssh/authorized_keys
+sed -i "/mahti-ood-$SLURM_JOB_ID/d" ~/.ssh/authorized_keys
 rm -rf /tmp/$USER/$SLURM_JOB_ID/.ssh/
