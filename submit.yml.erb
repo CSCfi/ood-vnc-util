@@ -1,5 +1,6 @@
 <% sing_image = desktop.empty? ? File.join("/appl","opt","ood","#{ENV["SLURM_OOD_ENV"]}","vnc_images", "xfce.sif") : File.join("/appl", "opt", "ood", "#{ENV["SLURM_OOD_ENV"]}", "vnc_images", "#{desktop}.sif") -%>
 ---
+cluster: "<%= OODClusters.first.id -%>"
 batch_connect:
   template: vnc
   header: |
