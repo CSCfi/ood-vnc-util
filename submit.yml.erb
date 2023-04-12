@@ -1,6 +1,6 @@
 <% sing_image = desktop.empty? ? File.join("/appl","opt","ood","#{ENV["SLURM_OOD_ENV"]}","vnc_images", "xfce.sif") : File.join("/appl", "opt", "ood", "#{ENV["SLURM_OOD_ENV"]}", "vnc_images", "#{desktop}.sif") -%>
 ---
-cluster: "<%= OODClusters.first.id -%>"
+cluster: "<%= ENV["CSC_CLUSTER"] -%>"
 
 <% max_mem_per_cpu = SlurmLimits.limits.fetch(csc_slurm_partition, {}).fetch(:max_mem_per_cpu, 0).to_f %>
 <% mem = (max_mem_per_cpu * 1024 * csc_cores.to_i).to_i %>
