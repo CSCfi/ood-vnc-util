@@ -41,6 +41,7 @@ Open on Demand vnc utils
 %__install -m 0644 -D template/icons/*.png %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/icons/
 %__install -m 0755 -D template/*.erb %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/
 %__install -m 0644 manifest.yml *.js *.erb README.md LICENSE %{buildroot}%{_localstatedir}%{app_path}%{app_name}/
+echo %{version}-%{release} > %{buildroot}%{_localstatedir}%{app_path}%{app_name}/VERSION
 
 %post
 # TODO: include form_validated.js globally to avoid this?
