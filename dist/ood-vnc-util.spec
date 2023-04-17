@@ -43,10 +43,6 @@ Open on Demand vnc utils
 %__install -m 0644 manifest.yml *.js *.erb README.md LICENSE %{buildroot}%{_localstatedir}%{app_path}%{app_name}/
 echo %{version}-%{release} > %{buildroot}%{_localstatedir}%{app_path}%{app_name}/VERSION
 
-%post
-# TODO: include form_validated.js globally to avoid this?
-%__cat "$(rpm -qil ood-util | grep form_validated.js)" >> %{_localstatedir}%{app_path}%{app_name}/form.js
-
 %files
 
 %{_localstatedir}%{app_path}%{app_name}
