@@ -2,7 +2,7 @@
 %define app_name ood-vnc
 
 Name:           ood-vnc-util
-Version:        1
+Version:        2
 Release:        1%{?dist}
 Summary:        Open on Demand vnc utils
 
