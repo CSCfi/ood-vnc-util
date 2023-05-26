@@ -3,7 +3,7 @@ cd "${HOME}"
 
 module purge && module restore
 /appl/opt/ood/$SLURM_OOD_ENV/soft/ssh-keygen.sh
-echo "Host r????? mahti* *.bullx localhost
+echo -e "\nHost r????? mahti* *.bullx localhost
 HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
