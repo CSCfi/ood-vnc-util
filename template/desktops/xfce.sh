@@ -1,18 +1,12 @@
 #!/bin/bash
 
-export PS1='(CONTAINER)[\u@\h \W]\$ '
+unset  XDG_RUNTIME_DIR
+export XDG_CONFIG_HOME="$HOME/Desktop/.config"
+export XDG_DESKTOP_DIR=$HOME/Desktop
+export XDG_DATA_HOME="$HOME/Desktop/.local/share"
+mkdir -p $XDG_DATA_HOME
+#lumi-quota  | grep  "^/" | awk '{print $1}' | sed 's@^.*@file://& &@g' > ./.config/gtk-3.0/bookmarks &
 
-# Remove any preconfigured monitors
-if [[ -f "${HOME}/.config/monitors.xml" ]]; then
-  mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
-fi
-
-# Copy over default panel if doesn't exist, otherwise it will prompt the user
-PANEL_CONFIG="$XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
-if [[ ! -e "${PANEL_CONFIG}" ]]; then
-  mkdir -p "$(dirname "${PANEL_CONFIG}")"
-  cp "/etc/xdg/xfce4/panel/default.xml" "${PANEL_CONFIG}"
-fi
 
 # Disable startup services
 xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool -s false
@@ -21,8 +15,6 @@ xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool -s false
 # Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
 xdg-user-dirs-update --set DESKTOP "$XDG_DESKTOP_DIR"
 
-# Copy over the user's icons
-cp -n "$HOME/Desktop"/* "$XDG_DESKTOP_DIR"
 
 # Disable useless services on autostart
 AUTOSTART="$XDG_CONFIG_HOME/autostart"
@@ -54,4 +46,6 @@ xfconf-query -c xfce4-screensaver -n -t bool -p /saver/idle-activation/enabled -
 xfconf-query -c xfce4-screensaver -n -t bool -p /lock/enabled -s false
 
 # Start up xfce desktop (block until user logs out of desktop)
+
+export PS1='(CONTAINER)[\u@\h \W]\$ '
 xfce4-session

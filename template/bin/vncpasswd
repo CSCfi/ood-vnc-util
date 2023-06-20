@@ -1,3 +1,3 @@
 #!/bin/bash
 
-singularity_wrapper exec vncpasswd "$@"
+singularity exec -B /pfs,/scratch,/projappl,/flash "$VNC_IMAGE" /opt/TurboVNC/bin/vncpasswd "$@"
