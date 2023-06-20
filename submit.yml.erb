@@ -5,6 +5,12 @@ cluster: "<%= ENV["CSC_CLUSTER"] -%>"
 <% max_mem_per_cpu = SlurmLimits.limits.fetch(csc_slurm_partition, {}).fetch(:max_mem_per_cpu, 0).to_f %>
 <% mem = (max_mem_per_cpu * 1024 * csc_cores.to_i).to_i %>
 
+<% n_gpus = 1 %>
+<% gpu_type = SlurmLimits.limits&.fetch(csc_slurm_partition, nil)&.fetch(:gpu_types)&.first %>
+<% gres = [] %>
+<% gres.push("nvme:#{csc_nvme}") if csc_nvme.to_i > 0 %>
+<% gres.push("gpu:#{gpu_type}:#{n_gpus}") if gpu_type %>
+
 batch_connect:
   template: vnc
   header: |
@@ -18,15 +24,15 @@ batch_connect:
   websockify_cmd: 'singularity_wrapper exec /opt/websockify/run'
 script:
   native:
-    - '-c'
-    - '<%= csc_cores %>'
-    - '-t'
-    - '<%= csc_time %>'
-    <% if max_mem_per_cpu > 0 %>
-    - '--mem=<%= mem -%>M'
-    <% else %>
-    - '--mem=<%= csc_memory -%>G'
-    <% end %>
-    <% if csc_nvme.to_i > 0 %>
-    - '--gres=nvme:<%= csc_nvme.to_i -%>'
-    <% end %>
+      - '-c'
+      - '<%= csc_cores  %>'
+      - '-t'
+      - '<%= csc_time %>'
+      <% if max_mem_per_cpu > 0 %>
+      - '--mem=<%= mem -%>M'
+      <% else %>
+      - '--mem=<%= csc_memory -%>G'
+      <% end %>
+      <% unless gres.empty? %>
+      - '--gres=<%= gres.join(",") -%>'
+      <% end %>
