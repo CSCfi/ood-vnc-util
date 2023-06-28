@@ -29,7 +29,7 @@ if [ -d "/appl/data" ]; then
 fi
 '''
 
-<% sing_image = File.join("/appl/local/ood","#{ENV["SLURM_OOD_ENV"]}","vnc_images/xfce.sif") -%>
+<% sing_image = File.join("/appl/local/ood","#{ENV["SLURM_OOD_ENV"]}","container_images/xfce.sif") -%>
 
 cat /etc/passwd <( singularity exec -B $HOME "<%= sing_image %>" cat /etc/passwd  ) > "<%= File.join(session.staged_root, "passwd") %>"
 
