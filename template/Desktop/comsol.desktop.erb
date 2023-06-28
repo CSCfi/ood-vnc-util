@@ -3,8 +3,8 @@ Type=Application
 Name=COMSOL
 Terminal=true
 <% if context.desktop == "mate" %>
-Exec=bash -c "module load comsol;comsol -3drend sw"
+Exec=bash -c "module load comsol;comsol -3drend sw -tmpdir $TMPDIR -configuration $TMPDIR -data $TMPDIR"
 <%else%>
-Exec=module load comsol;comsol -3drend sw
+Exec=module load comsol;comsol -3drend sw -tmpdir $TMPDIR -configuration $TMPDIR -data $TMPDIR
 <%end%>
 Icon=<%= File.join(session.staged_root, "icons", "comsol.png") -%>
