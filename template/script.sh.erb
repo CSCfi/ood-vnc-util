@@ -4,7 +4,30 @@ cd "${HOME}"
 module purge && module restore
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
+export XDG_DESKTOP_DIR=$HOME/Desktop
 mkdir -p $XDG_DESKTOP_DIR
+
+appl_path="/appl/local/ood/$SLURM_OOD_ENV"
+
+[ ! -f "$XDG_DESKTOP_DIR/blender.desktop" ] && \
+  echo "[Desktop Entry]
+Type=Application
+Name=Blender
+Terminal=true
+Exec=$appl_path/container_images/blender.sif
+Icon=$appl_path/desktop_icons/blender.svg
+" > "$XDG_DESKTOP_DIR/blender.desktop" && \
+  chmod +x "$XDG_DESKTOP_DIR/blender.desktop"
+
+[ ! -f "$XDG_DESKTOP_DIR/paraview.desktop" ] && \
+echo "[Desktop Entry]
+Type=Application
+Name=Paraview
+Terminal=true
+Exec=$appl_path/container_images/paraview.sif
+Icon=$appl_path/desktop_icons/paraview.png
+" > "$XDG_DESKTOP_DIR/paraview.desktop" && \
+  chmod +x "$XDG_DESKTOP_DIR/paraview.desktop"
 
 # TODO: Fix this for LUMI
 '''
@@ -33,4 +56,4 @@ fi
 
 cat /etc/passwd <( singularity exec -B $HOME "<%= sing_image %>" cat /etc/passwd  ) > "<%= File.join(session.staged_root, "passwd") %>"
 
-singularity exec -B /pfs,/scratch,/project,/projappl,/flash,/etc/slurm/ -B /usr/bin/srun,/usr/bin/sbatch -B /usr/lib64/slurm/ -B /usr/lib64/libmunge.so.2 -B /etc/munge/,<%= File.join(session.staged_root, "passwd") %>:/etc/passwd,/usr/lib64/lua/5.3/,/var/run,/usr/share/lua/5.3 "<%= sing_image %>" bash -cl "<%= File.join(session.staged_root, "desktops/xfce.sh") %>"
+singularity exec -B /pfs,/scratch,/project,/projappl,/flash,/appl,/etc/slurm/ -B /usr/bin/srun,/usr/bin/sbatch -B /usr/lib64/slurm/ -B /usr/lib64/libmunge.so.2 -B /etc/munge/,<%= File.join(session.staged_root, "passwd") %>:/etc/passwd,/usr/lib64/lua/5.3/,/var/run,/usr/share/lua/5.3 "<%= sing_image %>" bash -cl "<%= File.join(session.staged_root, "desktops/xfce.sh") %>"
