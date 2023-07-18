@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Blender
+Terminal=true
+Exec=bash -c "/appl/local/ood/$SLURM_OOD_ENV/container_images/blender.sif"
+TryExec=nvidia-smi
+# Icon should be in /appl/local/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=blender
+

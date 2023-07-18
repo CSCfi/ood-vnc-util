@@ -7,28 +7,6 @@ export SHELL="$(getent passwd $USER | cut -d: -f7)"
 export XDG_DESKTOP_DIR=$HOME/Desktop
 mkdir -p $XDG_DESKTOP_DIR
 
-appl_path="/appl/local/ood/$SLURM_OOD_ENV"
-
-[ ! -f "$XDG_DESKTOP_DIR/blender.desktop" ] && \
-  echo "[Desktop Entry]
-Type=Application
-Name=Blender
-Terminal=true
-Exec=$appl_path/container_images/blender.sif
-Icon=$appl_path/desktop_icons/blender.svg
-" > "$XDG_DESKTOP_DIR/blender.desktop" && \
-  chmod +x "$XDG_DESKTOP_DIR/blender.desktop"
-
-[ ! -f "$XDG_DESKTOP_DIR/paraview.desktop" ] && \
-echo "[Desktop Entry]
-Type=Application
-Name=Paraview
-Terminal=true
-Exec=$appl_path/container_images/paraview.sif
-Icon=$appl_path/desktop_icons/paraview.png
-" > "$XDG_DESKTOP_DIR/paraview.desktop" && \
-  chmod +x "$XDG_DESKTOP_DIR/paraview.desktop"
-
 <% sing_image = File.join("/appl/local/ood","#{ENV["SLURM_OOD_ENV"]}","container_images/xfce.sif") -%>
 
 cat /etc/passwd <( singularity exec -B $HOME "<%= sing_image %>" cat /etc/passwd  ) > "<%= File.join(session.staged_root, "passwd") %>"
