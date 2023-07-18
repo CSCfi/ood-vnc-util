@@ -1,82 +1,90 @@
-From: rockylinux:8.6 
+Bootstrap: docker
+From: opensuse/leap:15.4
 
-%environment 
-  SHELL=/bin/bash
-  export SHELL
-  export "PATH=/opt/TurboVNC/bin:${PATH}"
-  # https://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl
-  export LC_CTYPE=en_US.UTF-8
-  export LC_ALL=en_US.UTF-8
-
-%post 
-
-    # Only here to allow rootless building of container
+%post
+    VGL_VERSION=3.0.2
     cp /usr/bin/true /usr/sbin/groupadd
     cp /usr/bin/true /usr/sbin/useradd
-    dnf -y install unbound-libs
+    mkdir /BackgroundImages
+    zypper -n install wget
+    wget -O /BackgroundImages/lumi.jpg https://www.lumi-supercomputer.eu/content/uploads/2022/10/LUMI_supercomputer_2022_web.jpg
+    zypper -n install patterns-openSUSE-xfce
+    zypper -n install xterm
+    zypper -n install hostname
+    zypper -n install which
+    zypper -n install python3
+    zypper -n install python3-pip
+    pip3 install numpy
+    zypper -n install xkbcomp
+    zypper -n install xkbutils
+    zypper -n install xauth
+    zypper -n install wget
+    zypper -n install tar
+    zypper -n install xz
+    zypper -n install glibc-lang
+    zypper -n install glibc-locale
+    zypper -n install firefox
+    zypper -n install emacs
+    zypper -n install gedit
 
-    dnf -y install libnsl
-    dnf -y install dnf-plugins-core
-    yum -y install epel-release
-    dnf -y install firefox  
-    dnf -y install emacs
-    dnf -y install gedit
-    dnf -y install glibc-all-langpacks    
-    dnf -y config-manager --set-enabled powertools
-    dnf -y update
-    dnf -y install glibc-all-langpacks
-    yum -y install Lmod
-    yum -y install xorg-x11-fonts-Type1 xorg-x11-fonts-misc
-    yum -y install libglvnd-opengl
-    yum install -y freeglut-devel
-    dnf -y groupinstall "xfce"
-
-    yum -y install xterm
-    yum -y install xkeyboard-config
-    yum -y install hostname
-    yum -y install which
-    yum -y install python3
-    yum -y install python3-pip
-    yes | pip3 install numpy
-    yum -y install xkbcomp
-    yum -y install xorg-x11-xkb-utils
-    yum -y install xauth
-    yum -y install wget
-    yum -y install tar
-    yum -y install xz
-    yum install -y \
-    less \
-    vim \
-    libxkbcommon-x11 \
-    libglvnd \
-    libXv \
-    xorg-x11-server-Xvfb \
-    tcsh \
-    motif \
-    libXp \
-    libXpm \
-    xterm \
-    git \
-    xdg-user-dirs
-
-    wget http://www.TurboVNC.org/key/VGL-GPG-KEY
-    rpm --import VGL-GPG-KEY
-    yum -y install git
-    export TURBOVNC_VERSION=2.2.6
-    wget --no-check-certificate https://sourceforge.net/projects/turbovnc/files/${TURBOVNC_VERSION}/turbovnc-${TURBOVNC_VERSION}.x86_64.rpm
-    yum -y install turbovnc-${TURBOVNC_VERSION}.x86_64.rpm 
-    rm turbovnc-${TURBOVNC_VERSION}.x86_64.rpm 
-    mkdir -p /opt/websockify
-    wget https://github.com/novnc/websockify/archive/master.tar.gz -q -O - | tar xzf - -C /opt/websockify --strip-components=1
-    yum clean all && rm -rf /var/cache/yum
-    dbus-uuidgen > /etc/machine-id
-
-    # Hide the non-host terminal
-    echo -e '#!/bin/bash\n
+    cd /
+    wget -O VirtualGL-${VGL_VERSION}.x86_64.rpm https://sourceforge.net/projects/virtualgl/files/${VGL_VERSION}/VirtualGL-${VGL_VERSION}.x86_64.rpm/download
+    zypper -n install libXv1
+    zypper -n install Mesa-libGL1
+    zypper -n install Mesa-libEGL1 libGLU1
+    zypper -n install libglvnd libglvnd-devel
+    zypper -n install xorg-x11-xauth xterm libXtst6
+    zypper -n install xorg-x11-fonts
+    zypper -n install kmod
+    rpm -i /VirtualGL-${VGL_VERSION}.x86_64.rpm
+    zypper -n install xfce4-terminal
+    zypper -n install xdg-user-dirs
+    chmod -R o+rX /etc/
+    echo '<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-desktop" version="1.0">
+  <property name="desktop-menu" type="empty">
+    <property name="show" type="empty"/>
+  </property>
+  <property name="windowlist-menu" type="empty">
+    <property name="show" type="empty"/>
+  </property>
+  <property name="backdrop" type="empty">
+    <property name="screen0" type="empty">
+      <property name="monitorVNC-0" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/BackgroundImages/lumi.jpg"/>
+        </property>
+        <property name="workspace1" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/BackgroundImages/lumi.jpg"/>
+        </property>
+        <property name="workspace2" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/BackgroundImages/lumi.jpg"/>
+        </property>
+        <property name="workspace3" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/BackgroundImages/lumi.jpg"/>
+        </property>
+      </property>
+    </property>
+  </property>
+  <property name="last" type="empty">
+    <property name="window-width" type="int" value="641"/>
+    <property name="window-height" type="int" value="556"/>
+  </property>
+</channel>
+' > /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+   echo -e '#!/bin/bash\n
 if [[ -z "$@" ]];then
-    ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;bash -l"
+    srun --jobid=$SLURM_JOB_ID --overlap --pty bash -l
 else
-    ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR; $@ "
+    srun --jobid=$SLURM_JOB_ID --overlap --pty bash -lc "$@"
 fi
 ' > /usr/bin/host_terminal
     chmod +x /usr/bin/host_terminal
