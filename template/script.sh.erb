@@ -7,8 +7,16 @@ export SHELL="$(getent passwd $USER | cut -d: -f7)"
 export XDG_DESKTOP_DIR=$HOME/Desktop
 mkdir -p $XDG_DESKTOP_DIR
 
-<% sing_image = File.join("/appl/local/ood","#{ENV["SLURM_OOD_ENV"]}","container_images/xfce.sif") -%>
+SING_IMAGE="/appl/local/ood/$SLURM_OOD_ENV/container_images/xfce.sif"
+STAGED_ROOT="<%= session.staged_root -%>"
 
-cat /etc/passwd <( singularity exec -B $HOME "<%= sing_image %>" cat /etc/passwd  ) > "<%= File.join(session.staged_root, "passwd") %>"
+cat /etc/passwd <( singularity exec -B $HOME "$SING_IMAGE" cat /etc/passwd  ) > "$STAGED_ROOT/passwd"
 
-singularity exec -B /pfs,/scratch,/project,/projappl,/flash,/appl,/etc/slurm/ -B /usr/bin/srun,/usr/bin/sbatch -B /usr/lib64/slurm/ -B /usr/lib64/libmunge.so.2 -B /etc/munge/,<%= File.join(session.staged_root, "passwd") %>:/etc/passwd,/usr/lib64/lua/5.3/,/var/run,/usr/share/lua/5.3 "<%= sing_image %>" bash -cl "<%= File.join(session.staged_root, "desktops/xfce.sh") %>"
+singularity exec \
+  -B /pfs,/scratch,/project,/projappl,/flash,/appl,/etc/slurm/ \
+  -B /usr/bin/srun,/usr/bin/sbatch \
+  -B /usr/lib64/slurm/ \
+  -B /usr/lib64/libmunge.so.2 \
+  -B /etc/munge/,"$STAGED_ROOT/passwd":/etc/passwd,/usr/lib64/lua/5.3/,/var/run,/usr/share/lua/5.3 \
+  "$SING_IMAGE" \
+  bash -cl "$STAGED_ROOT/desktops/xfce.sh"
