@@ -12,11 +12,17 @@ STAGED_ROOT="<%= session.staged_root -%>"
 
 cat /etc/passwd <( singularity exec -B $HOME "$SING_IMAGE" cat /etc/passwd  ) > "$STAGED_ROOT/passwd"
 
+if [ "$SLURM_JOB_PARTITION" = "lumid" ]; then
+  # .desktop files contain TryExec=/ENABLE_VGL_APPS if they require VGL, i.e. only visible in menu when this is mounted.
+  ENABLE_VGL_APPS_BIND="-B /bin/true:/ENABLE_VGL_APPS"
+fi
+
 singularity exec \
   -B /pfs,/scratch,/project,/projappl,/flash,/appl,/etc/slurm/ \
   -B /usr/bin/srun,/usr/bin/sbatch \
   -B /usr/lib64/slurm/ \
   -B /usr/lib64/libmunge.so.2 \
   -B /etc/munge/,"$STAGED_ROOT/passwd":/etc/passwd,/usr/lib64/lua/5.3/,/var/run,/usr/share/lua/5.3 \
+  ${ENABLE_VGL_APPS_BIND} \
   "$SING_IMAGE" \
   bash -cl "$STAGED_ROOT/desktops/xfce.sh"
