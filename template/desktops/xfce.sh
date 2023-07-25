@@ -8,6 +8,10 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS%%:}${XDG_DATA_DIRS:+:}/appl/local/ood/$SLU
 
 #lumi-quota  | grep  "^/" | awk '{print $1}' | sed 's@^.*@file://& &@g' > ./.config/gtk-3.0/bookmarks &
 
+export PS1='(CONTAINER)[\u@\h \W]\$ '
+if [ -n "$PROMPT_COMMAND" ]; then
+  export PROMPT_COMMAND="${PROMPT_COMMAND/; PS1=\"Apptainer> \"/}"
+fi
 
 # Disable startup services
 xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool -s false
@@ -47,6 +51,4 @@ xfconf-query -c xfce4-screensaver -n -t bool -p /saver/idle-activation/enabled -
 xfconf-query -c xfce4-screensaver -n -t bool -p /lock/enabled -s false
 
 # Start up xfce desktop (block until user logs out of desktop)
-
-export PS1='(CONTAINER)[\u@\h \W]\$ '
 xfce4-session
