@@ -29,8 +29,29 @@ attributes:
     widget: select
     options:
       - ["None", ""]
+      - [
+          "Blender",
+          "blender",
+          data-option-for-csc-slurm-partition-interactive: false,
+          data-option-for-csc-slurm-partition-small: false,
+          data-option-for-csc-slurm-partition-small-g: false,
+          data-option-for-csc-slurm-partition-largemem: false,
+          data-option-for-csc-slurm-partition-dev-g: false,
+          data-option-for-csc-slurm-partition-debug: false
+        ]
+      - [
+          "ParaView",
+          "paraview",
+          data-option-for-csc-slurm-partition-interactive: false,
+          data-option-for-csc-slurm-partition-small: false,
+          data-option-for-csc-slurm-partition-small-g: false,
+          data-option-for-csc-slurm-partition-largemem: false,
+          data-option-for-csc-slurm-partition-dev-g: false,
+          data-option-for-csc-slurm-partition-debug: false
+        ]
     value: ""
-    fixed: true
+    wrapper: # hide field by default to prevent flickering
+      class: "d-none"
   csc_cores:
     value: 2
   csc_memory:

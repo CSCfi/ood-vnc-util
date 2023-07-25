@@ -1,10 +1,6 @@
 #!/bin/bash
 
 unset  XDG_RUNTIME_DIR
-export XDG_CONFIG_HOME="$HOME/Desktop/.config"
-export XDG_DESKTOP_DIR=$HOME/Desktop
-export XDG_DATA_HOME="$HOME/Desktop/.local/share"
-mkdir -p $XDG_DATA_HOME
 
 # XDG_DATA_DIRS needs to be set before adding our path to it.
 source /etc/profile.d/xdg-environment.sh

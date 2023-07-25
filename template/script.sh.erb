@@ -4,8 +4,12 @@ cd "${HOME}"
 module purge && module restore
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
+export XDG_CONFIG_HOME="$HOME/Desktop/.config"
 export XDG_DESKTOP_DIR=$HOME/Desktop
+export XDG_DATA_HOME="$HOME/Desktop/.local/share"
+
 mkdir -p $XDG_DESKTOP_DIR
+mkdir -p $XDG_DATA_HOME
 
 SING_IMAGE="/appl/local/ood/$SLURM_OOD_ENV/container_images/xfce.sif"
 STAGED_ROOT="<%= session.staged_root -%>"
@@ -15,6 +19,16 @@ cat /etc/passwd <( singularity exec -B $HOME "$SING_IMAGE" cat /etc/passwd  ) > 
 if [ "$SLURM_JOB_PARTITION" = "lumid" ]; then
   # .desktop files contain TryExec=/ENABLE_VGL_APPS if they require VGL, i.e. only visible in menu when this is mounted.
   ENABLE_VGL_APPS_BIND="-B /bin/true:/ENABLE_VGL_APPS"
+fi
+
+app="<%= context.app -%>"
+
+if [ -n "$app" ]; then
+  cmd=$(grep "^Exec=" "/appl/local/ood/$SLURM_OOD_ENV/share/applications/$app.desktop" | sed -e 's/Exec=//')
+  if [ -n "$cmd" ]; then
+    echo "Launching $app"
+    eval "$cmd" &
+  fi
 fi
 
 singularity exec \
