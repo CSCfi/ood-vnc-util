@@ -2,13 +2,13 @@ attributes:
   csc_slurm_partition:
     value: interactive
     select:
-      - "interactive"
-      - "small"
-      - "small-g"
-      - "largemem"
+      - ["interactive", data-hide-app: true]
+      - ["small", data-hide-app: true]
+      - ["small-g", data-hide-app: true]
+      - ["largemem", data-hide-app: true]
       - "lumid"
-      - "dev-g"
-      - "debug"
+      - ["dev-g", data-hide-app: true]
+      - ["debug", data-hide-app: true]
   csc_slurm_reservation:
     partitions:
       - "interactive"
@@ -50,8 +50,6 @@ attributes:
           data-option-for-csc-slurm-partition-debug: false
         ]
     value: ""
-    wrapper: # hide field by default to prevent flickering
-      class: "d-none"
   csc_cores:
     value: 2
   csc_memory:
