@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=SAGA GIS
+Terminal=true
+Exec=module load r-env;apptainer_wrapper exec saga_gui
+# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=saga
