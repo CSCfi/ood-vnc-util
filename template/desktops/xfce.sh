@@ -7,6 +7,9 @@ if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
 
+# XDG_DATA_DIRS needs to be set before adding our path to it.
+export XDG_DATA_DIRS="${XDG_DATA_DIRS%%:}${XDG_DATA_DIRS:+:}/appl/opt/ood/$SLURM_OOD_ENV/share${XDG_DATA_DIRS:-:/usr/local/share:/usr/share}"
+
 # Copy over default panel if doesn't exist, otherwise it will prompt the user
 PANEL_CONFIG="$XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
 if [[ ! -e "${PANEL_CONFIG}" ]]; then
@@ -20,9 +23,6 @@ xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool -s false
 
 # Setting XDG_DESKOP_DIR only doesn't work, need to run xdg-user-dirs-update
 xdg-user-dirs-update --set DESKTOP "$XDG_DESKTOP_DIR"
-
-# Copy over the user's icons
-cp -n "$HOME/Desktop"/* "$XDG_DESKTOP_DIR"
 
 # Disable useless services on autostart
 AUTOSTART="$XDG_CONFIG_HOME/autostart"

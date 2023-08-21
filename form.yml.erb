@@ -28,6 +28,11 @@ attributes:
   csc_extra_desc:
     desc: |
       <a href="https://docs.csc.fi/computing/webinterface/desktop/" target="_blank">Documentation</a>
+  reset_desktop_icons:
+    widget: check_box
+    label: "Reset desktop icons"
+    value: 0
+    cacheable: false
 
 form:
   - csc_extra_desc
@@ -42,6 +47,7 @@ form:
   - csc_header_settings
   - desktop
   - app
+  - reset_desktop_icons
   - bc_email_on_started
   - csc_reset_cache
   - csc_slurm_limits
