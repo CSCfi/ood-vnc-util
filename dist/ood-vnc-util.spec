@@ -32,11 +32,12 @@ Open on Demand vnc utils
 
 %install
 
-%__install -m 0755 -d %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/{apps,bin,config,Desktop,desktops,icons}
+%__install -m 0755 -d %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/{apps,bin,config,Desktop,desktops}
+%__install -m 0755 -d %{buildroot}%{_localstatedir}%{app_path}%{app_name}/icons
 %__install -m 0755 -D template/bin/* %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/bin/
 # TODO: remove unused desktops
 %__install -m 0755 -D template/desktops/*.sh %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/desktops/
-%__install -m 0644 -D template/icons/*.png %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/icons/
+%__install -m 0644 -D icons/*.png icons/*.svg %{buildroot}%{_localstatedir}%{app_path}%{app_name}/icons
 %__install -m 0755 -D template/*.erb %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/
 %__install -m 0644 manifest.yml *.erb README.md LICENSE %{buildroot}%{_localstatedir}%{app_path}%{app_name}/
 echo %{version}-%{release} > %{buildroot}%{_localstatedir}%{app_path}%{app_name}/VERSION
