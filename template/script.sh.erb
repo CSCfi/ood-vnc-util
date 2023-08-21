@@ -6,9 +6,15 @@ echo "Host r????? puhti* *.bullx localhost
 HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
-export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
-export XDG_DESKTOP_DIR="<%= session.staged_root.join("Desktop") %>"
-mkdir -p $XDG_DESKTOP_DIR
+export XDG_CONFIG_HOME="$HOME/Desktop/.config"
+export XDG_DESKTOP_DIR=$HOME/Desktop
+export XDG_DATA_HOME="$HOME/Desktop/.local/share"
+
+mkdir -p $XDG_DATA_HOME
+
+<% if context.reset_desktop_icons == "1" %>
+   find "/appl/opt/ood/$SLURM_OOD_ENV/share/applications/" -mindepth 1 -exec cp {} ${XDG_DESKTOP_DIR}/ \;
+<% end %>
 
 echo "Launching desktop <%= context.desktop %> with app <%= context.app %>"
 

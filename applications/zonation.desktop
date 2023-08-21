@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Zonation
+Terminal=true
+Exec=module load zonation;z5
+# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=zonation

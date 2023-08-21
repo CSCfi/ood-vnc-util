@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=VMD
+Terminal=true
+Exec=module load vmd;vmd
+# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=vmd
