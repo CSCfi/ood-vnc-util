@@ -10,6 +10,7 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS%%:}${XDG_DATA_DIRS:+:}/appl/local/ood/$SLU
 
 export PS1='(CONTAINER)[\u@\h \W]\$ '
 if [ -n "$PROMPT_COMMAND" ]; then
+  export PROMPT_COMMAND="${PROMPT_COMMAND/PS1=\"Apptainer> \"; unset PROMPT_COMMAND/}"
   export PROMPT_COMMAND="${PROMPT_COMMAND/; PS1=\"Apptainer> \"/}"
 fi
 
