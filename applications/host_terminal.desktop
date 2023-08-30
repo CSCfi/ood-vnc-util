@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Terminal
+Terminal=true
+Exec=bash -l
+# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=terminal
+

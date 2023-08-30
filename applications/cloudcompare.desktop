@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=CloudCompare
+Terminal=true
+Exec=ml cloudcompare;CloudCompare
+# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=cloudcompare

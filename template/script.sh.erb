@@ -6,9 +6,14 @@ echo "Host r????? puhti* *.bullx localhost
 HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
 
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
-export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
-export XDG_DESKTOP_DIR="<%= session.staged_root.join("Desktop") %>"
-mkdir -p $XDG_DESKTOP_DIR
+export XDG_CONFIG_HOME="$HOME/Desktop/.config"
+export XDG_DESKTOP_DIR=$HOME/Desktop
+export XDG_DATA_HOME="$HOME/Desktop/.local/share"
+
+# Create icons if XDG_DATA_HOME was created (first launch), or the user wants to reset the icons.
+if [[ "$(mkdir -pv "$XDG_DATA_HOME" | wc -l)" -gt 0 || "<%= context.reset_desktop_icons -%>" == "1" ]]; then
+   find "/appl/opt/ood/$SLURM_OOD_ENV/share/applications/" -mindepth 1 -exec cp {} ${XDG_DESKTOP_DIR}/ \;
+fi
 
 echo "Launching desktop <%= context.desktop %> with app <%= context.app %>"
 
