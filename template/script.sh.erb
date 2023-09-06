@@ -21,16 +21,6 @@ if [ "$SLURM_JOB_PARTITION" = "lumid" ]; then
   ENABLE_VGL_APPS_BIND="-B /bin/true:/ENABLE_VGL_APPS"
 fi
 
-app="<%= context.app -%>"
-
-if [ -n "$app" ]; then
-  cmd=$(grep "^Exec=" "/appl/local/ood/$SLURM_OOD_ENV/share/applications/$app.desktop" | sed -e 's/Exec=//')
-  if [ -n "$cmd" ]; then
-    echo "Launching $app"
-    eval "$cmd" &
-  fi
-fi
-
 singularity exec \
   -B /pfs,/scratch,/project,/projappl,/flash,/appl,/etc/slurm/ \
   -B /usr/bin/srun,/usr/bin/sbatch \
