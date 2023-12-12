@@ -72,7 +72,7 @@ From: rockylinux:8.8
     wget https://github.com/novnc/websockify/archive/master.tar.gz -q -O - | tar xzf - -C /opt/websockify --strip-components=1
 
     # Firefox
-    export FIREFOX_VERSION="115.3.1esr"
+    export FIREFOX_VERSION="115.5.0esr"
     dnf -y install alsa-lib atk bzip2 cairo cairo-gobject dbus-glib dbus-libs fontconfig freetype \
                    gdk-pixbuf2 glib2 glibc gtk3 gtk-update-icon-cache libffi libgcc libstdc++ libX11 \
                    libX11-xcb libxcb libXcomposite libXcursor libXdamage libXext libXfixes libXi \
