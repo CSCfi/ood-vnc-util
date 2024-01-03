@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=Paraview
+Name=Paraview 5.11
 Terminal=true
-Exec=bash -c "/appl/local/ood/$SLURM_OOD_ENV/container_images/paraview.sif"
+Exec=bash -c "/appl/local/ood/$SLURM_OOD_ENV/container_images/paraview_5.11.sif"
 TryExec=/ENABLE_VGL_APPS
 # Icon should be in /appl/local/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=paraview
