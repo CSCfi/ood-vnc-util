@@ -2,7 +2,7 @@
 cd "${HOME}"
 
 module purge && module restore
-/appl/opt/ood/test/soft/ssh-keygen.sh
+/appl/opt/ood/$SLURM_OOD_ENV/soft/ssh-keygen.sh
 echo "Host r????? puhti* *.bullx localhost
 HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
 
