@@ -26,6 +26,7 @@ From: rockylinux:8.6
     dnf -y config-manager --set-enabled powertools
     dnf -y update
     dnf -y install glibc-all-langpacks
+    dnf -y install hwloc
     yum -y install Lmod
     yum -y install xorg-x11-fonts-Type1 xorg-x11-fonts-misc
     yum -y install libglvnd-opengl
@@ -75,10 +76,11 @@ From: rockylinux:8.6
     # Hide the non-host terminal
     echo -e '#!/bin/bash\n
 if [[ -z "$@" ]];then
-    ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR;bash -l"
+    srun --jobid=$SLURM_JOB_ID --overlap --pty /usr/bin/bash -l
 else
-    ssh -t $HOSTNAME "export DISPLAY=$DISPLAY;export TMPDIR=$TMPDIR;export XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR; $@ "
+    srun --jobid=$SLURM_JOB_ID --overlap --pty /usr/bin/bash -lc "$@"
 fi
+[ $? -ne 0 ] && read
 ' > /usr/bin/host_terminal
     chmod +x /usr/bin/host_terminal
     cp /usr/bin/xterm /usr/bin/real-xterm
