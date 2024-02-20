@@ -14,6 +14,7 @@ Source:         %{name}-%{version}.tar.bz2
 Requires:       ondemand
 Requires:       ood-util
 Requires:       ood-initializers
+Obsoletes:      ood-virtualgl
 
 # Disable debuginfo
 %global debug_package %{nil}
