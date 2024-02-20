@@ -1,6 +1,8 @@
 #!/bin/bash
 cd "${HOME}"
 
+module purge && module restore
+
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
 
 SING_IMAGE="/appl/opt/ood/$SLURM_OOD_ENV/vnc_images/xfce.sif"
