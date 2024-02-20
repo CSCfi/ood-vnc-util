@@ -1,14 +1,13 @@
 #!/bin/bash
 
+export XDG_DATA_DIRS="/appl/opt/ood/$SLURM_OOD_ENV/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+
 export PS1='(CONTAINER)[\u@\h \W]\$ '
 
 # Remove any preconfigured monitors
 if [[ -f "${HOME}/.config/monitors.xml" ]]; then
   mv "${HOME}/.config/monitors.xml" "${HOME}/.config/monitors.xml.bak"
 fi
-
-# XDG_DATA_DIRS needs to be set before adding our path to it.
-export XDG_DATA_DIRS="${XDG_DATA_DIRS%%:}${XDG_DATA_DIRS:+:}/appl/opt/ood/$SLURM_OOD_ENV/share${XDG_DATA_DIRS:-:/usr/local/share:/usr/share}"
 
 # Copy over default panel if doesn't exist, otherwise it will prompt the user
 PANEL_CONFIG="$XDG_CONFIG_HOME/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
