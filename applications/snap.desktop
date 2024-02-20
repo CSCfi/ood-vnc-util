@@ -3,5 +3,4 @@ Type=Application
 Name=SNAP
 Terminal=true
 Exec=module load snap;source snap_add_userdir $TMPDIR;snap
-# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=snap

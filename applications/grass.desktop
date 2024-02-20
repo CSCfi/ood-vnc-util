@@ -2,6 +2,5 @@
 Type=Application
 Name=GRASS GIS
 Terminal=true
-Exec=module load qgis;grass
-# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Exec=module load grassgis;grass
 Icon=grass

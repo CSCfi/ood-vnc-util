@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=VMD (Accelerated)
+Terminal=true
+Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/vmd.sif
+TryExec=/ENABLE_VGL_APPS
+Icon=vmd

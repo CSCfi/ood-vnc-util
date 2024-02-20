@@ -3,5 +3,4 @@ Type=Application
 Name=COMSOL
 Terminal=true
 Exec=module load comsol;comsol -3drend sw -tmpdir $TMPDIR -configuration $TMPDIR -data $TMPDIR
-# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=comsol

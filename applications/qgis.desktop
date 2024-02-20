@@ -3,5 +3,4 @@ Type=Application
 Name=QGIS
 Terminal=true
 Exec=module load qgis;qgis
-# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=qgis

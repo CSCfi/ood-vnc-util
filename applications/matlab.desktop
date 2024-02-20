@@ -3,5 +3,4 @@ Type=Application
 Name=MATLAB
 Terminal=true
 Exec=module load matlab; matlab
-# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=matlab

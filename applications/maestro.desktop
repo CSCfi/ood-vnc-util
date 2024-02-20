@@ -3,5 +3,4 @@ Type=Application
 Name=Maestro
 Terminal=true
 Exec=module load maestro;maestro
-# /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=maestro
