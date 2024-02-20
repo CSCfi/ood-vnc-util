@@ -34,7 +34,6 @@ Open on Demand vnc utils
 
 %__install -m 0755 -d %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/{apps,bin,desktops}
 %__install -m 0755 -d %{buildroot}%{_localstatedir}%{app_path}%{app_name}/{applications,icons}
-%__install -m 0755 -D template/apps/*.sh %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/apps/
 %__install -m 0755 -D template/bin/* %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/bin/
 %__install -m 0755 -D applications/*.desktop %{buildroot}%{_localstatedir}%{app_path}%{app_name}/applications
 %__install -m 0644 -D icons/*.png %{buildroot}%{_localstatedir}%{app_path}%{app_name}/icons/
