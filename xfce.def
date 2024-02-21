@@ -13,6 +13,8 @@ From: rockylinux:8.8
   applications/firefox.desktop /usr/share/applications/firefox.desktop
 
 %post 
+    export FIREFOX_VERSION="115.5.0esr"
+    export TURBOVNC_VERSION=2.2.6
 
     # Only here to allow rootless building of container
     cp /usr/bin/true /usr/sbin/groupadd
@@ -66,7 +68,6 @@ From: rockylinux:8.8
     wget http://www.TurboVNC.org/key/VGL-GPG-KEY
     rpm --import VGL-GPG-KEY
     yum -y install git
-    export TURBOVNC_VERSION=2.2.6
     wget --no-check-certificate https://sourceforge.net/projects/turbovnc/files/${TURBOVNC_VERSION}/turbovnc-${TURBOVNC_VERSION}.x86_64.rpm
     yum -y install turbovnc-${TURBOVNC_VERSION}.x86_64.rpm 
     rm turbovnc-${TURBOVNC_VERSION}.x86_64.rpm 
@@ -74,7 +75,6 @@ From: rockylinux:8.8
     wget https://github.com/novnc/websockify/archive/master.tar.gz -q -O - | tar xzf - -C /opt/websockify --strip-components=1
 
     # Firefox
-    export FIREFOX_VERSION="115.5.0esr"
     dnf -y install alsa-lib atk bzip2 cairo cairo-gobject dbus-glib dbus-libs fontconfig freetype \
                    gdk-pixbuf2 glib2 glibc gtk3 gtk-update-icon-cache libffi libgcc libstdc++ libX11 \
                    libX11-xcb libxcb libXcomposite libXcursor libXdamage libXext libXfixes libXi \
