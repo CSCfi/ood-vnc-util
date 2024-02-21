@@ -1,6 +1,16 @@
 #!/bin/bash
 
+export XDG_CONFIG_HOME="$HOME/Desktop/.config"
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DATA_HOME="$HOME/Desktop/.local/share"
+export XDG_RUNTIME_DIR="$TMPDIR/xdg_runtime"
+
 export XDG_DATA_DIRS="/appl/opt/ood/$SLURM_OOD_ENV/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+
+# Create icons if XDG_DATA_HOME was created (first launch), or the user wants to reset the icons.
+if [[ "$(mkdir -pv "$XDG_DATA_HOME" | wc -l)" -gt 0 || "<%= context.reset_desktop_icons -%>" == "1" ]]; then
+   find "/appl/opt/ood/$SLURM_OOD_ENV/share/applications/" -mindepth 1 -exec cp {} ${XDG_DESKTOP_DIR}/ \;
+fi
 
 export PS1='(CONTAINER)[\u@\h \W]\$ '
 

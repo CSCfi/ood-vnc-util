@@ -2,63 +2,73 @@
 cd "${HOME}"
 
 module purge && module restore
-/appl/opt/ood/$SLURM_OOD_ENV/soft/ssh-keygen.sh
-echo -e "\nHost *.mahti.csc.fi c???? g???? mahti* localhost
-HostbasedAuthentication no" >> /tmp/$USER/$SLURM_JOB_ID/.ssh/config 
-
 export SHELL="$(getent passwd $USER | cut -d: -f7)"
-export XDG_CONFIG_HOME="$HOME/Desktop/.config"
-export XDG_DESKTOP_DIR=$HOME/Desktop
-export XDG_DATA_HOME="$HOME/Desktop/.local/share"
 
-# Create icons if XDG_DATA_HOME was created (first launch), or the user wants to reset the icons.
-if [[ "$(mkdir -pv "$XDG_DATA_HOME" | wc -l)" -gt 0 || "<%= context.reset_desktop_icons -%>" == "1" ]]; then
-   find "/appl/opt/ood/$SLURM_OOD_ENV/share/applications/" -mindepth 1 -exec cp {} ${XDG_DESKTOP_DIR}/ \;
-fi
+SING_IMAGE="/appl/opt/ood/$SLURM_OOD_ENV/vnc_images/xfce.sif"
+STAGED_ROOT="<%= session.staged_root -%>"
 
-echo "Launching desktop <%= context.desktop %> with app <%= context.app %>"
-
-desktop_script="<%= session.staged_root.join("desktops", context.desktop.empty? ? "nodesktop.sh" : "#{context.desktop}.sh") -%>"
-app_script="<%= session.staged_root.join("apps", "#{context.app}.sh") -%>"
-app="<%= context.app %>"
-export SING_FLAGS="$SING_FLAGS -B /tmp/$USER/$SLURM_JOB_ID/.ssh/config:$HOME/.ssh/config,/tmp/$USER/$SLURM_JOB_ID/.ssh/id_rsa_mahti_ood:$HOME/.ssh/id_rsa_mahti_ood"
+cat /etc/passwd <( singularity exec -B $HOME "$SING_IMAGE" cat /etc/passwd  ) > "$STAGED_ROOT/passwd"
 
 # Bind common CSC environment directories
-SING_FLAGS="$SING_FLAGS -B /projappl:/projappl -B /scratch:/scratch"
+MOUNTS="$HOME,/appl,/projappl,/scratch"
 
 # Bind TMPDIR if it is set and directory exists
 if [ -d "$TMPDIR" ]; then
-    SING_FLAGS="$SING_FLAGS -B $TMPDIR:$TMPDIR"
+    MOUNTS="$MOUNTS,$TMPDIR"
 fi
 
 # Bind LOCAL_SCRATCH if it is set and directory exists
 if [ -d "$LOCAL_SCRATCH" ]; then
-    SING_FLAGS="$SING_FLAGS -B $LOCAL_SCRATCH:$LOCAL_SCRATCH"
-fi
-
-# Bind /fmi if it is set and directory exists
-if [ -d "/fmi" ]; then
-    SING_FLAGS="$SING_FLAGS -B /fmi:/fmi"
+    MOUNTS="$MOUNTS,$LOCAL_SCRATCH"
 fi
 
 # Bind /appl/data
 if [ -d "/appl/data" ]; then
-    SING_FLAGS="$SING_FLAGS -B /appl/data:/appl/data"
+    MOUNTS="$MOUNTS,/appl/data"
 fi
-<% if context.desktop.empty? %>
-  singularity exec $SING_FLAGS $SING_IMAGE "$desktop_script" &
-  if [[ -z "$app" ]];then
-    xterm
-  else
-    exec "$app_script"
-  fi
-<% else %>
-  if [[ -n "$app" ]];then
-    exec "$app_script" &
-  fi
-  singularity exec $SING_FLAGS $SING_IMAGE "$desktop_script"
-<% end %>
 
+MOUNTS="$MOUNTS,\
+/etc/slurm,\
+/usr/bin/srun,\
+/usr/bin/sbatch,\
+/usr/lib/slurm,\
+/usr/lib64/slurm,\
+/usr/lib64/libmunge.so.2,\
+/opt/pmix,\
+/etc/munge,\
+$STAGED_ROOT/passwd:/etc/passwd,\
+/usr/lib64/lua/5.3,\
+/usr/share/lua/5.3,\
+/var/run\
+"
 
-sed -i "/mahti-ood-$SLURM_JOB_ID/d" ~/.ssh/authorized_keys
-rm -rf /tmp/$USER/$SLURM_JOB_ID/.ssh/
+# To easily mount the same directories for the appcontainers, have APPTAINER_BIND be same inside the container too.
+# After Apptainer 1.1.0 (I think) nested container bind mount fix APPTAINER_BIND=/src:/dst turns into
+# APPTAINER_BIND=/dst inside the container, which would require us to do "unset SINGULARITY_BIND; unset APPTAINER_BIND",
+# and specify mounts again.
+export APPTAINER_BIND=$MOUNTS
+export APPTAINERENV_APPTAINER_BIND=$MOUNTS
+export APPTAINERENV_SINGULARITY_BIND=$MOUNTS
+
+export APPTAINERENV_SHELL=$SHELL
+export APPTAINERENV_DISPLAY=$DISPLAY
+export APPTAINERENV_TMPDIR=$TMPDIR
+
+# Base env vars for making srun work
+export APPTAINERENV_SLURM_OOD_ENV=$SLURM_OOD_ENV
+export APPTAINERENV_SLURM_JOB_ID=$SLURM_JOB_ID
+export APPTAINERENV_SLURM_MPI_TYPE=$SLURM_MPI_TYPE
+
+# Env vars for running (graphical) apps using srun (possibly containerized)
+export APPTAINERENV_SLURM_EXPORT_ENV="\
+HOME,DISPLAY,TERM,LC_ALL,LC_CTYPE,\
+SINGULARITY_NAME,SINGULARITY_BIND,APPTAINER_BIND,\
+XDG_CONFIG_HOME,XDG_DESKTOP_DIR,XDG_DATA_HOME,XDG_DATA_DIRS,XDG_RUNTIME_DIR\
+"
+
+unset SING_FLAGS
+
+singularity exec \
+  --cleanenv \
+  $SING_IMAGE \
+  bash -cl "$STAGED_ROOT/desktops/xfce.sh"

@@ -1,4 +1,4 @@
-<% sing_image = desktop.empty? ? File.join("/appl","opt","ood","#{ENV["SLURM_OOD_ENV"]}","vnc_images", "xfce.sif") : File.join("/appl", "opt", "ood", "#{ENV["SLURM_OOD_ENV"]}", "vnc_images", "#{desktop}.sif") -%>
+<% vnc_image = File.join("/appl/opt/ood", ENV["SLURM_OOD_ENV"], "vnc_images/xfce.sif") %>
 ---
 cluster: "<%= ENV["CSC_CLUSTER"] -%>"
 
@@ -18,10 +18,10 @@ batch_connect:
     [[ $(type -t module) == "function" ]] & export -f module
     export XDG_RUNTIME_DIR="$TMPDIR/xdg_runtime"
     mkdir -p -m 700 "$XDG_RUNTIME_DIR"
+    export VNC_IMAGE="<%= vnc_image %>"
     export PATH="$PWD/bin:$PATH"
-    export SING_IMAGE="<%= sing_image -%>"
-    export SING_FLAGS="--nv -B $HOME -B /etc/ssh -B /tmp:/tmp -B /run:/run -B /appl:/appl"
-  websockify_cmd: 'singularity_wrapper exec /opt/websockify/run'
+    export SING_FLAGS="--nv -B $HOME  -B /tmp:/tmp -B /run:/run -B /appl:/appl"
+  websockify_cmd: 'singularity exec $SING_FLAGS "$VNC_IMAGE" /opt/websockify/run'
 script:
   native:
     - '-c'
