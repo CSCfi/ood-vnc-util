@@ -13,7 +13,7 @@ From: rockylinux:8.8
   applications/firefox.desktop /usr/share/applications/firefox.desktop
 
 %post 
-    export FIREFOX_VERSION="115.5.0esr"
+    export FIREFOX_VERSION="115.8.0esr"
     export TURBOVNC_VERSION=2.2.6
 
     # Only here to allow rootless building of container
