@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Maestro
+Categories=X-CSC;X-Biosciences
 Terminal=true
 Exec=module load maestro;maestro
 # Icon should be in /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps

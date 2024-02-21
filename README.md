@@ -20,3 +20,10 @@ For launching applications that need to run inside their own container, such as 
 We utilize OODs Ruby template functionality to create a directory with desktop shortcuts inside the OOD app data root.
 That way we isolate the OOD app from interfering with other possible OOD VNC apps and also make it possible to add additional desktop shortcuts without rebuilding the VNC containers.
 
+
+# Deploying
+
+- `applications` => `/appl/opt/ood/$SLURM_OOD_ENV/share/applications`
+- `icons` => `/appl/opt/ood/$SLURM_OOD_ENV/desktop_icons`
+- Create symlinks `/appl/opt/ood/$SLURM_OOD_ENV/share/icons/hicolor/{48x48,scalable}/apps` => `../../../../desktop_icons`
+- `menus` => `/appl/opt/ood/$SLURM_OOD_ENV/share/.config/menus`
