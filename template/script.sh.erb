@@ -36,6 +36,13 @@ fi
 if [[ "$SLURM_JOB_PARTITION" == *gpu* ]]; then
   # .desktop files contain TryExec=/ENABLE_VGL_APPS if they require VGL, i.e. only visible in menu when this is mounted.
   ENABLE_VGL_APPS_BIND="/bin/true:/ENABLE_VGL_APPS"
+  # Check groups for abaqus/ansys for showing/hiding them
+  if id -nG | grep -qw "<%= ENV["ANSYS_GROUP"] -%>"; then
+    ENABLE_VGL_APPS_BIND="$ENABLE_VGL_APPS_BIND,/bin/true:/ENABLE_ANSYS"
+  fi
+  if id -nG | grep -qw "<%= ENV["ABAQUS_GROUP"] -%>"; then
+    ENABLE_VGL_APPS_BIND="$ENABLE_VGL_APPS_BIND,/bin/true:/ENABLE_ABAQUS"
+  fi
 fi
 
 MOUNTS="$MOUNTS,\

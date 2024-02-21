@@ -3,5 +3,5 @@ Type=Application
 Name=Ansys Workbench (Accelerated)
 Terminal=true
 Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/ansys.sif
-TryExec=/ENABLE_VGL_APPS
+TryExec=/ENABLE_ANSYS
 Icon=ansys
