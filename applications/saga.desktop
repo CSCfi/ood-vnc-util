@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=SAGA GIS
+Categories=X-CSC;Geoscience
 Terminal=true
 Exec=module load r-env;apptainer_wrapper exec saga_gui
 Icon=saga

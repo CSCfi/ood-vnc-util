@@ -1,0 +1,65 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+"http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+<Menu>
+  <Name>CSC</Name>
+  <Menu>
+    <Name>All CSC Applications</Name>
+    <Include>
+      <Category>X-CSC</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Biosciences</Name>
+    <Include>
+      <Category>X-Biosciences</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Chemistry</Name>
+    <Include>
+      <Category>Chemistry</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Computational Engineering</Name>
+    <Include>
+      <Category>X-CompEng</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Geosciences</Name>
+    <Include>
+      <Category>Geoscience</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Mathematics and Statistics</Name>
+    <Include>
+      <Category>X-MathStats</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Physics</Name>
+    <Include>
+      <Category>X-Physics</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Visualization</Name>
+    <Include>
+      <Category>X-Visualization</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Quantum</Name>
+    <Include>
+      <Category>X-Quantum</Category>
+    </Include>
+  </Menu>
+  <Menu>
+    <Name>Miscellaneous</Name>
+    <Include>
+      <Category>X-Misc</Category>
+    </Include>
+  </Menu>
+</Menu>

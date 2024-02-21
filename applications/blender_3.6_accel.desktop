@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Blender 3.6 (Accelerated)
+Categories=X-CSC;X-Visualization
 Terminal=true
 Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/blender_3.6.sif
 TryExec=/ENABLE_VGL_APPS

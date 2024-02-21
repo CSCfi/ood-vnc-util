@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Abaqus CAE (Accelerated)
+Categories=X-CSC;X-CompEng
 Terminal=true
 Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/abaqus.sif
 TryExec=/ENABLE_ABAQUS

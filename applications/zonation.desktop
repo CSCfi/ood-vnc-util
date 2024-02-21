@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Zonation
+Categories=X-CSC;Geoscience
 Terminal=true
 Exec=module load zonation;z5
 Icon=zonation

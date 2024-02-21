@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=COMSOL
+Categories=X-CSC;X-CompEng
 Terminal=true
 Exec=module load comsol;comsol -3drend sw -tmpdir $TMPDIR -configuration $TMPDIR -data $TMPDIR
 Icon=comsol

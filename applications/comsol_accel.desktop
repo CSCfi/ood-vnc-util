@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=COMSOL (Accelerated)
+Categories=X-CSC;X-CompEng
 Terminal=true
 Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/comsol.sif
 TryExec=/ENABLE_VGL_APPS

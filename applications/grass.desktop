@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=GRASS GIS
+Categories=X-CSC;Geoscience
 Terminal=true
 Exec=module load grassgis;grass
 Icon=grass

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=VMD
+Categories=X-CSC;X-Biosciences
 Terminal=true
 Exec=module load vmd;vmd
 Icon=vmd

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=MATLAB
+Categories=X-CSC;X-MathStats
 Terminal=true
 Exec=module load matlab; matlab
 Icon=matlab

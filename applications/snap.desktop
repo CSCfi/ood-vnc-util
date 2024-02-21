@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=SNAP
+Categories=X-CSC;Geoscience
 Terminal=true
 Exec=module load snap;source snap_add_userdir $TMPDIR;snap
 Icon=snap

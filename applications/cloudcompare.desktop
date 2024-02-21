@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=CloudCompare
+Categories=X-CSC;Geoscience
 Terminal=true
 Exec=ml cloudcompare;CloudCompare
 Icon=cloudcompare
