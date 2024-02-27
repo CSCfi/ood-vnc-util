@@ -3,5 +3,5 @@ Type=Application
 Name=Maestro
 Categories=X-CSC;X-Biosciences
 Terminal=true
-Exec=module load maestro;maestro
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load maestro && maestro
 Icon=maestro

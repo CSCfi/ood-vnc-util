@@ -3,6 +3,5 @@ Type=Application
 Name=CloudCompare (Accelerated)
 Categories=X-CSC;Geoscience
 Terminal=true
-Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/cloudcompare.sif
-TryExec=/ENABLE_VGL_APPS
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/cloudcompare.sif
 Icon=cloudcompare

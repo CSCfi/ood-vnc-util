@@ -33,18 +33,6 @@ if [ -d "/appl/data" ]; then
     MOUNTS="$MOUNTS,/appl/data"
 fi
 
-if [[ "$SLURM_JOB_PARTITION" == *gpu* ]]; then
-  # .desktop files contain TryExec=/ENABLE_VGL_APPS if they require VGL, i.e. only visible in menu when this is mounted.
-  ENABLE_VGL_APPS_BIND="/bin/true:/ENABLE_VGL_APPS"
-  # Check groups for abaqus/ansys for showing/hiding them
-  if id -nG | grep -qw "<%= ENV["ANSYS_GROUP"] -%>"; then
-    ENABLE_VGL_APPS_BIND="$ENABLE_VGL_APPS_BIND,/bin/true:/ENABLE_ANSYS"
-  fi
-  if id -nG | grep -qw "<%= ENV["ABAQUS_GROUP"] -%>"; then
-    ENABLE_VGL_APPS_BIND="$ENABLE_VGL_APPS_BIND,/bin/true:/ENABLE_ABAQUS"
-  fi
-fi
-
 MOUNTS="$MOUNTS,\
 /etc/slurm,\
 /usr/bin/srun,\
@@ -58,7 +46,6 @@ $STAGED_ROOT/passwd:/etc/passwd,\
 /usr/lib64/lua/5.3,\
 /usr/share/lua/5.3,\
 /var/run\
-${ENABLE_VGL_APPS_BIND:+,$ENABLE_VGL_APPS_BIND}\
 "
 
 # To easily mount the same directories for the appcontainers, have APPTAINER_BIND be same inside the container too.

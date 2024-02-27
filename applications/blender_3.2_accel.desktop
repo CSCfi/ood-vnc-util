@@ -3,6 +3,5 @@ Type=Application
 Name=Blender 3.2 (Accelerated)
 Categories=X-CSC;X-Visualization
 Terminal=true
-Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/blender_3.2.sif
-TryExec=/ENABLE_VGL_APPS
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/blender_3.2.sif
 Icon=blender

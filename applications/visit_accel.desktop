@@ -3,6 +3,5 @@ Type=Application
 Name=VisIt (Accelerated)
 Categories=X-CSC;X-Visualization;X-Miscellaneous
 Terminal=true
-Exec=singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/visit.sif
-TryExec=/ENABLE_VGL_APPS
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/visit.sif
 Icon=visit

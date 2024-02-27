@@ -3,5 +3,5 @@ Type=Application
 Name=MATLAB
 Categories=X-CSC;X-MathStats
 Terminal=true
-Exec=module load matlab; matlab
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && { module load matlab; matlab; }
 Icon=matlab

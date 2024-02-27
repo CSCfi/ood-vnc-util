@@ -3,5 +3,5 @@ Type=Application
 Name=CloudCompare
 Categories=X-CSC;Geoscience
 Terminal=true
-Exec=ml cloudcompare;CloudCompare
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && ml cloudcompare && CloudCompare
 Icon=cloudcompare
