@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIALOG_TEXT="The application you are trying to launch does not have GPU accelerated, but you are on a GPU partition. Are you sure you want to continue?"
+DIALOG_TEXT="The application you are trying to launch does not have GPU acceleration, but you are on a GPU partition. Are you sure you want to continue?"
 DIALOG_TITLE="Are you sure?"
 
 {
