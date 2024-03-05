@@ -3,7 +3,7 @@
 
 Name:           ood-vnc-util
 Version:        1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Open on Demand vnc utils
 
 BuildArch:      noarch
