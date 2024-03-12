@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Grace
+Categories=X-CSC;X-Visualization
+Terminal=true
+Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load grace && xmgrace
+Icon=grace
