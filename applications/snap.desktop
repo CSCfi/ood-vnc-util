@@ -3,5 +3,5 @@ Type=Application
 Name=SNAP
 Categories=X-CSC;Geoscience
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load snap && source snap_add_userdir $TMPDIR && snap
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load snap && source snap_add_userdir $TMPDIR && snap"
 Icon=snap

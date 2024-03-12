@@ -3,5 +3,5 @@ Type=Application
 Name=SAGA GIS
 Categories=X-CSC;Geoscience
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load r-env && apptainer_wrapper exec saga_gui
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load r-env && apptainer_wrapper exec saga_gui"
 Icon=saga

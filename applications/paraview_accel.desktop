@@ -3,5 +3,5 @@ Type=Application
 Name=ParaView (Accelerated)
 Categories=X-CSC;X-Visualization;X-Miscellaneous
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/paraview.sif
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/paraview.sif"
 Icon=paraview

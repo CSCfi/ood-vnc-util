@@ -3,5 +3,5 @@ Type=Application
 Name=GRASS GIS
 Categories=X-CSC;Geoscience
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load grassgis && grass
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load grassgis && grass"
 Icon=grass

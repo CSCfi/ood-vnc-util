@@ -3,5 +3,5 @@ Type=Application
 Name=VMD
 Categories=X-CSC;X-Biosciences
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load vmd && vmd
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load vmd && vmd"
 Icon=vmd

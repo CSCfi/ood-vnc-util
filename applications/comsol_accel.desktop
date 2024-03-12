@@ -3,5 +3,5 @@ Type=Application
 Name=COMSOL (Accelerated)
 Categories=X-CSC;X-CompEng
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/comsol.sif
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/comsol.sif"
 Icon=comsol

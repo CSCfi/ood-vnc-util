@@ -3,6 +3,6 @@ Type=Application
 Name=Abaqus CAE (Accelerated)
 Categories=X-CSC;X-CompEng
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/abaqus.sif
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_gpu.sh && singularity run --nv /appl/opt/ood/$SLURM_OOD_ENV/vnc_images/abaqus.sif"
 TryExec=/appl/soft/eng/simulia/Commands_2022/abq2022
 Icon=abaqus

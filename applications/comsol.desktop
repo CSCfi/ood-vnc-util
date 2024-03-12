@@ -3,5 +3,5 @@ Type=Application
 Name=COMSOL
 Categories=X-CSC;X-CompEng
 Terminal=true
-Exec=/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load comsol && comsol -3drend sw -tmpdir $TMPDIR -configuration $TMPDIR -data $TMPDIR
+Exec=bash -c "/appl/opt/ood/$SLURM_OOD_ENV/soft/verify_nogpu.sh && module load comsol && comsol -3drend sw -tmpdir $TMPDIR -configuration $TMPDIR -data $TMPDIR"
 Icon=comsol
