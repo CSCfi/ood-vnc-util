@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=matlab
+Terminal=true
+Exec=ml use /appl/local/csc/modulefiles && ml matlab && matlab
+# Icon should be in /appl/local/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
+Icon=matlab
