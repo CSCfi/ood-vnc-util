@@ -3,6 +3,6 @@ Type=Application
 Name=VMD
 Categories=X-CSC;X-Biosciences
 Terminal=true
-Exec=module load vmd;vmd
+Exec=bash -c "module load vmd;vmd"
 # Icon should be in /appl/opt/ood/<env>/share/icons/hicolor/{48x48,scalable}/apps
 Icon=vmd.png
