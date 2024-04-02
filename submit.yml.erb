@@ -22,7 +22,7 @@ batch_connect:
     mkdir -p -m 700 "$XDG_RUNTIME_DIR"
     export VNC_IMAGE="<%= vnc_image %>"
     export PATH="$PWD/bin:$PATH"
-    export SING_FLAGS="--nv -B $HOME  -B /tmp:/tmp -B /run:/run -B /appl:/appl"
+    export SING_FLAGS="--nv -B $HOME  -B /tmp:/tmp -B /run:/run -B /appl:/appl --env PYTHONNOUSERSITE=1"
   websockify_cmd: 'singularity exec $SING_FLAGS "$VNC_IMAGE" /opt/websockify/run'
 script:
   native:
