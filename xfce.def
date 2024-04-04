@@ -43,7 +43,7 @@ From: rockylinux:8.8
     yum -y install which
     yum -y install python3
     yum -y install python3-pip
-    yes | pip3 install numpy
+    yum -y install python3-numpy
     yum -y install xkbcomp
     yum -y install xorg-x11-xkb-utils
     yum -y install xauth
