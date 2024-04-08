@@ -2,8 +2,8 @@
 %define app_name ood-vnc
 
 Name:           ood-vnc-util
-Version:        1
-Release:        2%{?dist}
+Version:        2
+Release:        1%{?dist}
 Summary:        Open on Demand vnc utils
 
 BuildArch:      noarch
