@@ -18,7 +18,7 @@ batch_connect:
     mkdir -p -m 700 "$XDG_RUNTIME_DIR"
     export VNC_IMAGE="<%= vnc_image %>"
     export PATH="$PWD/bin:$PATH"
-  websockify_cmd: 'singularity exec -B /pfs,/scratch,/projappl,/flash "$VNC_IMAGE" /opt/noVNC/utils/websockify/run'
+  websockify_cmd: 'singularity exec -B /pfs,/scratch,/projappl,/flash "$VNC_IMAGE" /opt/websockify/run'
 script:
   native:
       - '-c'
