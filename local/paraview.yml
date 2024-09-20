@@ -1,0 +1,8 @@
+title: "ParaView"
+description: |
+  Graphical desktop session with ParaView, a data analysis and visualization application.
+icon: "/../../../assets/images/icons/paraview.png"
+metadata:
+  profiles: "industry"
+attributes:
+  csc_slurm_partition: gpu

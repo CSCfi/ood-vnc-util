@@ -6,3 +6,5 @@ subcategory: "Graphical applications"
 role: batch_connect
 description: |
   Interactive session with graphical desktop, where different LUMI tools are available
+metadata:
+  profiles: "all,default,industry"

@@ -1,0 +1,8 @@
+title: "Blender"
+description: |
+  Graphical desktop session with Blender.
+icon: "/../../../assets/images/icons/blender.svg"
+metadata:
+  profiles: "industry"
+attributes:
+  csc_slurm_partition: gpu

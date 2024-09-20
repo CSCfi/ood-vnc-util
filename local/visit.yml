@@ -1,0 +1,8 @@
+title: "VisIt"
+description: |
+  Graphical desktop session with VisIt, an interactive, scalable, visualization, animation and analysis tool.
+icon: "/../../../assets/images/icons/visit.png"
+metadata:
+  profiles: "industry"
+attributes:
+  csc_slurm_partition: gpu
