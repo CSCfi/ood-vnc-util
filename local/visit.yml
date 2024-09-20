@@ -5,4 +5,5 @@ icon: "/../../../assets/images/icons/visit.png"
 metadata:
   profiles: "industry"
 attributes:
-  csc_slurm_partition: gpu
+  csc_slurm_partition: lumid
+  app: visit

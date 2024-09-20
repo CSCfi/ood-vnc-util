@@ -52,4 +52,14 @@ xfconf-query -c xfce4-screensaver -n -t bool -p /saver/idle-activation/enabled -
 xfconf-query -c xfce4-screensaver -n -t bool -p /lock/enabled -s false
 
 # Start up xfce desktop (block until user logs out of desktop)
-xfce4-session
+xfce4-session &
+pid=$!
+
+<% if context.app.present? %>
+app_cmd="$(grep '^Exec' /pfs/lustrep1/appl/local/ood/$SLURM_OOD_ENV/share/applications/<%= context.app %>.desktop  | tail -1  | sed 's/^Exec=//')"
+echo "Launching <%= context.app %> ($app_cmd)"
+/usr/bin/real-xfce4-terminal -e "/usr/bin/host_terminal $app_cmd"
+<% end %>
+
+wait "$pid"
+
