@@ -38,7 +38,7 @@ Open on Demand vnc utils
 %__install -m 0755 -D template/bin/* %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/bin/
 %__install -m 0755 -D icons/*.{png,svg} %{buildroot}/var/www/ood/assets/images/icons
 # TODO: remove unused desktops
-%__install -m 0755 -D template/desktops/*.sh %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/desktops/
+%__install -m 0755 -D template/desktops/*.sh.erb %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/desktops/
 %__install -m 0644 -D icons/*.png icons/*.svg %{buildroot}%{_localstatedir}%{app_path}%{app_name}/icons
 %__install -m 0755 -D template/*.erb %{buildroot}%{_localstatedir}%{app_path}%{app_name}/template/
 %__install -m 0755 -D local/*.yml %{buildroot}%{_localstatedir}%{app_path}%{app_name}/local/
