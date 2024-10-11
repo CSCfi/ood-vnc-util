@@ -21,12 +21,47 @@ if [ "$SLURM_JOB_PARTITION" = "lumid" ]; then
   ENABLE_VGL_APPS_BIND="-B /bin/true:/ENABLE_VGL_APPS"
 fi
 
+MOUNTS="$HOME,/pfs,/scratch,/project,/projappl,/flash,/appl"
+
+# Bind TMPDIR if it is set and directory exists
+if [ -d "$TMPDIR" ]; then
+    MOUNTS="$MOUNTS,$TMPDIR"
+fi
+
+MOUNTS="$MOUNTS,\
+/etc/slurm,\
+/usr/bin/srun,\
+/usr/bin/sbatch,\
+/usr/lib64/slurm,\
+/usr/lib64/libmunge.so.2,\
+/etc/munge,\
+$STAGED_ROOT/passwd:/etc/passwd,\
+/usr/lib64/lua/5.3,\
+/usr/share/lua/5.3,\
+/var/run\
+"
+
+export SINGULARITY_BIND="$MOUNTS"
+export SINGULARITYENV_SINGULARITY_BIND="$MOUNTS"
+
+export SINGULARITYENV_SHELL="$SHELL"
+export SINGULARITYENV_DISPLAY="$DISPLAY"
+export SINGULARITYENV_TMPDIR=$TMPDIR
+
+# Base env vars for making srun work
+export SINGULARITYENV_SLURM_OOD_ENV=$SLURM_OOD_ENV
+export SINGULARITYENV_SLURM_JOB_ID=$SLURM_JOB_ID
+
+# Env vars for running (graphical) apps using srun (possibly containerized)
+# Some containers check for only SINGULARITY_BIND. Skip APPTAINER_BIND exporting as that has priority and breaks things.
+export SINGULARITYENV_SLURM_EXPORT_ENV="\
+HOME,DISPLAY,TERM,LC_ALL,LC_CTYPE,\
+SINGULARITY_NAME,SINGULARITY_BIND,\
+XDG_DESKTOP_DIR,XDG_DATA_HOME,XDG_DATA_DIRS,XDG_RUNTIME_DIR\
+"
+
 singularity exec \
-  -B /pfs,/scratch,/project,/projappl,/flash,/appl,/etc/slurm/ \
-  -B /usr/bin/srun,/usr/bin/sbatch \
-  -B /usr/lib64/slurm/ \
-  -B /usr/lib64/libmunge.so.2 \
-  -B /etc/munge/,"$STAGED_ROOT/passwd":/etc/passwd,/usr/lib64/lua/5.3/,/var/run,/usr/share/lua/5.3 \
+  --cleanenv \
   ${ENABLE_VGL_APPS_BIND} \
   "$SING_IMAGE" \
   bash -cl "$STAGED_ROOT/desktops/xfce.sh"
