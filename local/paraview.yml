@@ -5,4 +5,6 @@ icon: "/../../../assets/images/icons/paraview.png"
 metadata:
   profiles: "industry"
 attributes:
+  csc_reset_cache:
+    app: "sys/ood-vnc/visit"
   app: paraview
