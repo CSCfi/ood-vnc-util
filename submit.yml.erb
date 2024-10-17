@@ -15,17 +15,21 @@ cluster: "<%= ENV["CSC_CLUSTER"] -%>"
 
 batch_connect:
   template: vnc_container
+  container_command: "apptainer"
   container_path: "<%= vnc_image %>"
   container_module: ""
+  container_start_args:
+    - --nv
+    - --bind=$HOME
+    - --bind=/tmp
+    - --bind=/run
+    - --bind=/appl
+    - --env=PYTHONNOUSERSITE=1
   header: |
     source /appl/profile/zz-csc-env.sh
     [[ $(type -t module) == "function" ]] & export -f module
     export XDG_RUNTIME_DIR="$TMPDIR/xdg_runtime"
     mkdir -p -m 700 "$XDG_RUNTIME_DIR"
-    export VNC_IMAGE="<%= vnc_image %>"
-    export PATH="$PWD/bin:$PATH"
-    export SING_FLAGS="--nv -B $HOME  -B /tmp:/tmp -B /run:/run -B /appl:/appl --env PYTHONNOUSERSITE=1"
-    export APPTAINER_PREPEND_PATH="$PWD/bin"
 script:
   native:
     - '-c'

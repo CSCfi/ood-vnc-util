@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec /opt/TurboVNC/bin/vncpasswd "$@"
