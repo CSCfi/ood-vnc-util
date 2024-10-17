@@ -14,7 +14,9 @@ cluster: "<%= ENV["CSC_CLUSTER"] -%>"
 <% gres.push("gpu:#{gpu_type}:#{n_gpus}") if gpu_type && n_gpus > 0 %>
 
 batch_connect:
-  template: vnc
+  template: vnc_container
+  container_path: "<%= vnc_image %>"
+  container_module: ""
   header: |
     source /appl/profile/zz-csc-env.sh
     [[ $(type -t module) == "function" ]] & export -f module
@@ -23,7 +25,7 @@ batch_connect:
     export VNC_IMAGE="<%= vnc_image %>"
     export PATH="$PWD/bin:$PATH"
     export SING_FLAGS="--nv -B $HOME  -B /tmp:/tmp -B /run:/run -B /appl:/appl --env PYTHONNOUSERSITE=1"
-  websockify_cmd: 'singularity exec $SING_FLAGS "$VNC_IMAGE" /opt/websockify/run'
+    export APPTAINER_PREPEND_PATH="$PWD/bin"
 script:
   native:
     - '-c'
