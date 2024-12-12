@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=SAGA GIS
+Terminal=true
+Exec=bash -c "ml use /appl/local/csc/modulefiles && ml qgis && saga_gui"
+Icon=saga_gis

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=QGIS
+Terminal=true
+Exec=bash -c "ml use /appl/local/csc/modulefiles && ml qgis && qgis"
+Icon=qgis

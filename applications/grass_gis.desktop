@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=GRASS GIS
+Terminal=true
+Exec=bash -c "ml use /appl/local/csc/modulefiles && ml qgis && grass"
+Icon=grass_gis
