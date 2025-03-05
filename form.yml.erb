@@ -1,3 +1,5 @@
+form_header: |
+  <a href="https://docs.csc.fi/computing/webinterface/desktop/" target="_blank">Documentation</a>
 attributes:
   csc_slurm_partition:
     value: interactive
@@ -22,9 +24,6 @@ attributes:
     value: 2
   csc_reset_cache:
     app: "sys/ood-vnc"
-  csc_extra_desc:
-    desc: |
-      <a href="https://docs.csc.fi/computing/webinterface/desktop/" target="_blank">Documentation</a>
   reset_desktop_icons:
     widget: check_box
     label: "Reset desktop icons"
@@ -32,7 +31,6 @@ attributes:
     cacheable: false
 
 form:
-  - csc_extra_desc
   - csc_slurm_reservation
   - csc_slurm_project
   - csc_slurm_partition
