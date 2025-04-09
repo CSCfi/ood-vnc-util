@@ -1,3 +1,5 @@
+form_header: |
+  <a href="https://docs.lumi-supercomputer.eu/runjobs/webui/desktop/" target="_blank">Documentation</a>
 attributes:
   csc_slurm_partition:
     value: interactive
@@ -24,12 +26,8 @@ attributes:
     value: 2
   csc_reset_cache:
     app: "sys/ood-vnc/default"
-  csc_extra_desc:
-    desc: |
-      <a href="https://docs.lumi-supercomputer.eu/runjobs/webui/desktop/" target="_blank">Documentation</a>
 
 form:
-  - csc_extra_desc
   - csc_slurm_reservation
   - csc_slurm_project
   - csc_slurm_partition
