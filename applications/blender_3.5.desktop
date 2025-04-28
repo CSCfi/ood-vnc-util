@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Blender
+Name=Blender 3.5
 Terminal=true
 Exec=bash -c "singularity run --nv /appl/local/ood/$SLURM_OOD_ENV/container_images/blender_3.5.sif"
 #TryExec=/ENABLE_VGL_APPS
