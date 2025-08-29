@@ -43,10 +43,18 @@ if [[ ! -e "${TERM_CONFIG}" ]]; then
   sed 's/^ \{4\}//' > "${TERM_CONFIG}" << EOL
     [Configuration]
     CommandLoginShell=TRUE
+    RunCustomCommand=TRUE
+    CustomCommand=/usr/bin/host_terminal
 EOL
 else
   sed -i \
     '/^CommandLoginShell=/{h;s/=.*/=TRUE/};${x;/^$/{s//CommandLoginShell=TRUE/;H};x}' \
+    "${TERM_CONFIG}"
+  sed -i \
+    '/^RunCustomCommand=/{h;s/=.*/=TRUE/};${x;/^$/{s//RunCustomCommand=TRUE/;H};x}' \
+    "${TERM_CONFIG}"
+  sed -i \
+    '/^CustomCommand=/{h;s/=.*/=\/usr\/bin\/host_terminal/};${x;/^$/{s//CustomCommand=\/usr\/bin\/host_terminal/;H};x}' \
     "${TERM_CONFIG}"
 fi
 
